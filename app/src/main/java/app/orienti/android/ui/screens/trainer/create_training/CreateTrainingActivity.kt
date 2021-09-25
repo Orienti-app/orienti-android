@@ -1,4 +1,4 @@
-package app.orienti.android.ui.screens.common.set_name
+package app.orienti.android.ui.screens.trainer.create_training
 
 import android.app.Activity
 import android.content.Context
@@ -7,14 +7,14 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
 import app.orienti.android.R
-import app.orienti.android.databinding.ActivitySetNameBinding
+import app.orienti.android.databinding.ActivityCreateTrainingBinding
 import app.orienti.android.ui.base.DefaultViewModel
 import app.orienti.android.ui.screens.trainer.create_track.CreateTrackActivity
 import sk.backbone.parent.ui.screens.ActivityTransitions
 import sk.backbone.parent.ui.screens.ParentActivity
 import sk.backbone.parent.utils.setSafeOnClickListener
 
-class SetNameActivity: ParentActivity<ActivitySetNameBinding>(ActivitySetNameBinding::inflate) {
+class CreateTrainingActivity: ParentActivity<ActivityCreateTrainingBinding>(ActivityCreateTrainingBinding::inflate) {
     private val viewModel by lazy {
         getViewModel<DefaultViewModel>()
     }
@@ -25,10 +25,6 @@ class SetNameActivity: ParentActivity<ActivitySetNameBinding>(ActivitySetNameBin
         super.onCreate(savedInstanceState)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        viewModel.getUserName()?.let {
-            viewBinding.name.text = it
-        }
 
         viewBinding.confirmButton.setSafeOnClickListener {
             val name = viewBinding.name.text
@@ -53,12 +49,8 @@ class SetNameActivity: ParentActivity<ActivitySetNameBinding>(ActivitySetNameBin
     }
 
     companion object {
-        fun getStartingIntent(context: Context): Intent {
-            return Intent(context, CreateTrackActivity::class.java)
-        }
-
         fun startActivity(context: Context) {
-            context.startActivity(getStartingIntent(context))
+            context.startActivity(Intent(context, CreateTrainingActivity::class.java))
         }
     }
 }

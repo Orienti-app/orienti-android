@@ -5,6 +5,12 @@
     <string name="global_started">Started</string>
     <string name="global_elapsed">Elapsed</string>
     <string name="global_since_last_control_point">Since last point</string>
+    <string name="global_training_name">Training name</string>
+    <string name="global_new_training">New training</string>
+    <string name="global_control_point_name">Control point name</string>
+    <string name="global_tack_name">Tack name</string>
+    <string name="global_new_track">New track</string>
+    <string name="global_new_control_point">New control point</string>
 
     <string name="menu_new_run">New run</string>
     <string name="menu_change_name">Change name</string>

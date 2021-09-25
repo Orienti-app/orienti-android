@@ -17,6 +17,25 @@
             android:screenOrientation="portrait"
             android:exported="true" />
         <activity
+            android:name=".ui.screens.trainer.create_training.CreateTrainingActivity"
+            android:theme="@style/Theme.Orienti"
+            android:label="@string/global_new_training"
+            android:screenOrientation="portrait"
+            android:exported="true" />
+        <activity
+            android:name=".ui.screens.trainer.create_track.CreateTrackActivity"
+            android:theme="@style/Theme.Orienti"
+            android:label="@string/global_new_track"
+            android:screenOrientation="portrait"
+            android:exported="true" />
+
+        <activity
+            android:name=".ui.screens.trainer.create_control_point.CreateControlPointActivity"
+            android:theme="@style/Theme.Orienti"
+            android:label="@string/global_new_control_point"
+            android:screenOrientation="portrait"
+            android:exported="true" />
+        <activity
             android:name=".ui.screens.common.set_name.SetNameActivity"
             android:theme="@style/Theme.Orienti"
             android:screenOrientation="portrait"

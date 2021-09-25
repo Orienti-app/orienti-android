@@ -15,11 +15,11 @@
         android:id="@id/menu_trainer_bottom_navigation_tracks"
         android:name="app.orienti.android.ui.screens.trainer.main.tracks.TracksFragment"
         android:label="@string/activity_main_trainer_tracks"
-        tools:layout="@layout/fragment_control_points" />
+        tools:layout="@layout/fragment_tracks" />
 
     <fragment
         android:id="@id/menu_trainer_bottom_navigation_control_points"
         android:name="app.orienti.android.ui.screens.trainer.main.control_points.ControlPointsFragment"
         android:label="@string/activity_main_trainer_control_points"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_control_points" />
 </navigation>
