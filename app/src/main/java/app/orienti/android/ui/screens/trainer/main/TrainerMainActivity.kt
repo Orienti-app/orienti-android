@@ -10,7 +10,6 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import app.orienti.android.R
 import app.orienti.android.databinding.ActivityMainTrainerBinding
-import app.orienti.android.ui.screens.runner.main.RunnerMainActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
@@ -27,11 +26,15 @@ class TrainerMainActivity : AppCompatActivity() {
         val navView: BottomNavigationView = binding.navView
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
-        ))
+
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.menu_trainer_bottom_navigation_trainings,
+                R.id.menu_trainer_bottom_navigation_tracks,
+                R.id.menu_trainer_bottom_navigation_control_points,
+                R.id.menu_trainer_bottom_navigation_settings
+            )
+        )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }

@@ -12,7 +12,6 @@ import app.orienti.android.ui.base.DefaultViewModel
 import sk.backbone.parent.ui.screens.ActivityTransitions
 import sk.backbone.parent.ui.screens.ParentActivity
 import sk.backbone.parent.utils.setSafeOnClickListener
-import androidx.annotation.NonNull
 
 class SetNameActivity: ParentActivity<ActivitySetNameBinding>(ActivitySetNameBinding::inflate) {
     private val viewModel by lazy {

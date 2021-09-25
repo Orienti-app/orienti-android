@@ -15,7 +15,7 @@
 
     <dimen name="spacing_tiny_4_dp">4dp</dimen>
     <dimen name="spacing_small_10_dp">10dp</dimen>
-    <dimen name="spacing_screen_20_dp">20dp</dimen>
+    <dimen name="spacing_screen_16_dp">16dp</dimen>
     <dimen name="spacing_large_30_dp">30dp</dimen>
 
     <dimen name="radius_input_background">5dp</dimen>

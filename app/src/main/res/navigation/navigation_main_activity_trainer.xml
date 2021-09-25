@@ -3,23 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/menu_trainer_bottom_navigation_trainings">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="app.orienti.android.ui.screens.trainer.main.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@id/menu_trainer_bottom_navigation_trainings"
+        android:name="app.orienti.android.ui.screens.trainer.main.trainings.TrainingsFragment"
+        android:label="@string/activity_main_trainer_trainings"
+        tools:layout="@layout/fragment_trainings" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="app.orienti.android.ui.screens.trainer.main.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@id/menu_trainer_bottom_navigation_tracks"
+        android:name="app.orienti.android.ui.screens.trainer.main.tracks.TracksFragment"
+        android:label="@string/activity_main_trainer_tracks"
+        tools:layout="@layout/fragment_control_points" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="app.orienti.android.ui.screens.trainer.main.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@id/menu_trainer_bottom_navigation_control_points"
+        android:name="app.orienti.android.ui.screens.trainer.main.control_points.ControlPointsFragment"
+        android:label="@string/activity_main_trainer_control_points"
+        tools:layout="@layout/fragment_settings" />
+
+    <fragment
+        android:id="@id/menu_trainer_bottom_navigation_settings"
+        android:name="app.orienti.android.ui.screens.trainer.main.settings.SettingsFragment"
+        android:label="@string/activity_main_trainer_control_settings"
+        tools:layout="@layout/fragment_settings" />
 </navigation>
