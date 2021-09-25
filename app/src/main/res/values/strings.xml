@@ -1,7 +1,14 @@
 <resources>
     <string name="global_app_name">Orienti</string>
     <string name="global_confirm">Confirm</string>
+    <string name="global_synchronize">Synchronize</string>
+    <string name="global_started">Started</string>
+    <string name="global_elapsed">Elapsed</string>
+    <string name="global_since_last_control_point">Since last point</string>
 
+    <string name="menu_new_run">New run</string>
+    <string name="menu_change_name">Change name</string>
+    <string name="menu_change_mode">Change mode</string>
     <string name="activity_main_trainer_label">Trainer</string>
     <string name="activity_main_trainer_trainings">Trainings</string>
     <string name="activity_main_trainer_tracks">Tracks</string>
@@ -9,16 +16,10 @@
     <string name="activity_main_trainer_control_settings">Settings</string>
 
     <string name="activity_main_runner_label">Runner</string>
-    <string name="menu_new_run">New run</string>
-    <string name="menu_change_name">Change name</string>
-    <string name="menu_change_mode">Change mode</string>
+    <string name="activity_main_runner_scanned_in_format">Scanned in %s</string>
 
     <string name="activity_set_name_label">Setting name</string>
     <string name="activity_set_name_your_name">Your new name</string>
 
     <string name="validation_enter_valid_name">Please enter valid name</string>
-    <string name="global_synchronize">Synchronize</string>
-    <string name="global_started">Started</string>
-    <string name="global_elapsed">Elapsed</string>
-    <string name="global_since_last_control_point">Since last point</string>
 </resources>

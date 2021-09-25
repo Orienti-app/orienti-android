@@ -33,12 +33,9 @@ android {
 }
 
 dependencies {
-    implementation 'com.github.backbonesk:parent:cf1f8826'
+    implementation 'com.github.backbonesk:parent:360e23fd'
     implementation platform('com.google.firebase:firebase-bom:26.1.0')
 
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
-    implementation 'com.google.android.material:material:1.3.0'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
 }
