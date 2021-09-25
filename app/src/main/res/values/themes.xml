@@ -4,19 +4,19 @@
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryVariant">@color/primary</item>
         <item name="colorOnPrimary">@color/onPrimary</item>
-
         <item name="colorSecondary">@color/secondary</item>
         <item name="colorSecondaryVariant">@color/secondary_variant</item>
         <item name="colorOnSecondary">@color/onSecondary</item>
-
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-
         <item name="materialButtonStyle">@style/Theme.Orienti.Button</item>
+        <item name="buttonStyle">@style/Theme.Orienti.Button</item>
     </style>
 
     <style name="Theme.Orienti.Button" parent="Widget.MaterialComponents.Button">
         <item name="textAllCaps">false</item>
         <item name="iconGravity">end</item>
+        <item name="android:minHeight">60dp</item>
+        <item name="android:textSize">@dimen/text_size_19_sp</item>
     </style>
 
     <style name="Theme.Orienti.NoActionBar" parent="Theme.Orienti">

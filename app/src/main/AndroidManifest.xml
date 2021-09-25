@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="app.orienti.android">
 
     <application
@@ -8,28 +9,34 @@
         android:label="@string/global_app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Orienti">
+        android:theme="@style/Theme.Orienti"
+        tools:ignore="LockedOrientationActivity">
         <activity
             android:name=".ui.screens.common.select_mode.SelectModeActivity"
             android:theme="@style/Theme.Orienti.NoActionBar"
-            android:exported="true"/>
+            android:screenOrientation="portrait"
+            android:exported="true" />
         <activity
             android:name=".ui.screens.common.set_name.SetNameActivity"
             android:theme="@style/Theme.Orienti"
+            android:screenOrientation="portrait"
             android:label="@string/activity_set_name_label"
             android:exported="true"/>
         <activity
             android:name="app.orienti.android.ui.screens.runner.main.RunnerMainActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:label="@string/activity_main_runner_label" />
         <activity
             android:name=".ui.screens.trainer.main.TrainerMainActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:label="@string/activity_main_trainer_label">
         </activity>
         <activity
             android:name=".ui.screens.common.launcher.LauncherActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Orienti.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

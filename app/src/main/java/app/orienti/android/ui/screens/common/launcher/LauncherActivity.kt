@@ -23,8 +23,6 @@ class LauncherActivity : ParentActivity<ViewBinding>(null) {
             UserType.TRAINER -> TrainerMainActivity.startActivity(this)
         }
 
-
-
         finish()
     }
 }
