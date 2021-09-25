@@ -3,28 +3,23 @@ package app.orienti.android.ui.screens.runner.main
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
+import android.view.*
+import androidx.recyclerview.widget.LinearLayoutManager
 import app.orienti.android.R
 import app.orienti.android.databinding.ActivityMainRunnerBinding
 import app.orienti.android.ui.screens.common.select_mode.SelectModeActivity
 import app.orienti.android.ui.screens.common.set_name.SetNameActivity
-import com.google.android.material.snackbar.Snackbar
+import sk.backbone.parent.ui.components.LinearSpacingItemDecorationVertical
+import sk.backbone.parent.ui.screens.ParentActivity
 
-class RunnerMainActivity : AppCompatActivity() {
-
-    private lateinit var binding: ActivityMainRunnerBinding
-
+class RunnerMainActivity : ParentActivity<ActivityMainRunnerBinding>(ActivityMainRunnerBinding::inflate) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityMainRunnerBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+        viewBinding.controlPointsRecycler.layoutManager = LinearLayoutManager(this)
+        viewBinding.controlPointsRecycler.addItemDecoration(LinearSpacingItemDecorationVertical(resources.getDimension(R.dimen.spacing_default_15_dp).toInt()))
+        viewBinding.controlPointsRecycler.adapter = ControlPointsAdapter(this).apply {
+            replaceDataSet(listOf(true, true, false, true, false, true, false, true, false, true, false, true, false, true, false))
         }
     }
 
@@ -57,3 +52,5 @@ class RunnerMainActivity : AppCompatActivity() {
         }
     }
 }
+
+

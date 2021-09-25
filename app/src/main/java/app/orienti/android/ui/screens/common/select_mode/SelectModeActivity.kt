@@ -24,14 +24,12 @@ class SelectModeActivity : ParentActivity<ActivitySelectModeBinding>(ActivitySel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel.setUserName(null)
-        viewModel.setUserType(UserType.NONE)
-
         viewBinding.runner.setSafeOnClickListener {
             if(!hasEnteredName){
                 setRunnerNameLauncher.launch(SetNameActivity.getStartingIntent(this))
             } else {
                 RunnerMainActivity.startActivity(this)
+                viewModel.setUserType(UserType.RUNNER)
             }
         }
 
@@ -40,6 +38,7 @@ class SelectModeActivity : ParentActivity<ActivitySelectModeBinding>(ActivitySel
                 setTrainerNameLauncher.launch(SetNameActivity.getStartingIntent(this))
             } else {
                 TrainerMainActivity.startActivity(this)
+                viewModel.setUserType(UserType.TRAINER)
             }
         }
     }

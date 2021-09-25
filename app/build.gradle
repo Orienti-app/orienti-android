@@ -33,7 +33,7 @@ android {
 }
 
 dependencies {
-    implementation 'com.github.backbonesk:parent:26914533'
+    implementation 'com.github.backbonesk:parent:cf1f8826'
     implementation platform('com.google.firebase:firebase-bom:26.1.0')
 
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'

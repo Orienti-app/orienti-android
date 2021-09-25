@@ -18,4 +18,7 @@
 
     <string name="validation_enter_valid_name">Please enter valid name</string>
     <string name="global_synchronize">Synchronize</string>
+    <string name="global_started">Started</string>
+    <string name="global_elapsed">Elapsed</string>
+    <string name="global_since_last_control_point">Since last point</string>
 </resources>
