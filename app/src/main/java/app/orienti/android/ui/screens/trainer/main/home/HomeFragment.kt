@@ -1,4 +1,4 @@
-package app.orienti.android.ui.home
+package app.orienti.android.ui.screens.trainer.main.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,6 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import app.orienti.android.R
 import app.orienti.android.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {

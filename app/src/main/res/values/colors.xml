@@ -3,8 +3,8 @@
     <color name="primary">#F76C1B</color>
     <color name="primary_variant">#FF5E00</color>
     <color name="onPrimary">#FFFFFF</color>
-    <color name="secondary">#43aa8b</color>
-    <color name="secondary_variant">#00FFB2</color>
+    <color name="secondary">#1DA7F7</color>
+    <color name="secondary_variant">#007BFF</color>
     <color name="onSecondary">#FFFFFF</color>
 
     <color name="black">#FF000000</color>
