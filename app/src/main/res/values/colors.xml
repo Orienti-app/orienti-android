@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="primary">#F76C1B</color>
-    <color name="primary_variant">#FF5E00</color>
+    <color name="primary_variant">#DA6421</color>
     <color name="onPrimary">#FFFFFF</color>
-
 
     <color name="secondary">#2D2F31</color>
     <color name="secondary_variant">#5B5B5C</color>
