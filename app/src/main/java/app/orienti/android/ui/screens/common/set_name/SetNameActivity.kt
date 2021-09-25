@@ -55,5 +55,9 @@ class SetNameActivity: ParentActivity<ActivitySetNameBinding>(ActivitySetNameBin
         fun getStartingIntent(context: Context): Intent {
             return Intent(context, SetNameActivity::class.java)
         }
+
+        fun startActivity(context: Context) {
+            context.startActivity(getStartingIntent(context))
+        }
     }
 }

@@ -4,9 +4,12 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import app.orienti.android.R
 import app.orienti.android.databinding.ActivityMainRunnerBinding
+import app.orienti.android.ui.screens.common.select_mode.SelectModeActivity
+import app.orienti.android.ui.screens.common.set_name.SetNameActivity
 import com.google.android.material.snackbar.Snackbar
 
 class RunnerMainActivity : AppCompatActivity() {
@@ -27,8 +30,25 @@ class RunnerMainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = menuInflater
-        inflater.inflate(R.menu.menu_runner_main_activity, menu)
+        inflater.inflate(R.menu.context_menu_runner_main_activity, menu)
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.context_menu_runner_main_activity_new_run -> {
+                true
+            }
+            R.id.context_menu_runner_main_activity_change_name -> {
+                SetNameActivity.startActivity(this)
+                true
+            }
+            R.id.context_menu_runner_main_activity_change_mode -> {
+                SelectModeActivity.startActivity(this)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     companion object {

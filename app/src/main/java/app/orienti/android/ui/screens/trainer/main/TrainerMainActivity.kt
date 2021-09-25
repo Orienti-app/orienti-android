@@ -3,6 +3,8 @@ package app.orienti.android.ui.screens.trainer.main
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -10,6 +12,8 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import app.orienti.android.R
 import app.orienti.android.databinding.ActivityMainTrainerBinding
+import app.orienti.android.ui.screens.common.select_mode.SelectModeActivity
+import app.orienti.android.ui.screens.common.set_name.SetNameActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
@@ -32,11 +36,33 @@ class TrainerMainActivity : AppCompatActivity() {
                 R.id.menu_trainer_bottom_navigation_trainings,
                 R.id.menu_trainer_bottom_navigation_tracks,
                 R.id.menu_trainer_bottom_navigation_control_points,
-                R.id.menu_trainer_bottom_navigation_settings
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.context_menu_trainer_main_activity, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.context_menu_trainer_main_activity_synchronize -> {
+                true
+            }
+            R.id.context_menu_trainer_main_activity_change_name -> {
+                SetNameActivity.startActivity(this)
+                true
+            }
+            R.id.context_menu_trainer_main_activity_change_mode -> {
+                SelectModeActivity.startActivity(this)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     companion object {

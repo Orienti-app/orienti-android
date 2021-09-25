@@ -14,9 +14,4 @@
         android:id="@+id/menu_trainer_bottom_navigation_control_points"
         android:icon="@drawable/ic_notifications_black_24dp"
         android:title="@string/activity_main_trainer_control_points" />
-
-    <item
-        android:id="@+id/menu_trainer_bottom_navigation_settings"
-        android:icon="@drawable/ic_notifications_black_24dp"
-        android:title="@string/activity_main_trainer_control_settings" />
 </menu>

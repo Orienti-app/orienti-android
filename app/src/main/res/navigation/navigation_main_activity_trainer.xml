@@ -22,10 +22,4 @@
         android:name="app.orienti.android.ui.screens.trainer.main.control_points.ControlPointsFragment"
         android:label="@string/activity_main_trainer_control_points"
         tools:layout="@layout/fragment_settings" />
-
-    <fragment
-        android:id="@id/menu_trainer_bottom_navigation_settings"
-        android:name="app.orienti.android.ui.screens.trainer.main.settings.SettingsFragment"
-        android:label="@string/activity_main_trainer_control_settings"
-        tools:layout="@layout/fragment_settings" />
 </navigation>
