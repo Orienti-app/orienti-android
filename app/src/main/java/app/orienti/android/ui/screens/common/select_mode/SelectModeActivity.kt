@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import app.orienti.android.databinding.ActivitySelectModeBinding
+import app.orienti.android.entities.UserType
 import app.orienti.android.ui.base.DefaultViewModel
 import app.orienti.android.ui.screens.common.set_name.SetNameActivity
 import app.orienti.android.ui.screens.runner.main.RunnerMainActivity
@@ -24,6 +25,7 @@ class SelectModeActivity : ParentActivity<ActivitySelectModeBinding>(ActivitySel
         super.onCreate(savedInstanceState)
 
         viewModel.setUserName(null)
+        viewModel.setUserType(UserType.NONE)
 
         viewBinding.runner.setSafeOnClickListener {
             if(!hasEnteredName){
@@ -45,6 +47,7 @@ class SelectModeActivity : ParentActivity<ActivitySelectModeBinding>(ActivitySel
     private val setTrainerNameLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if(result.resultCode == Activity.RESULT_OK){
             TrainerMainActivity.startActivity(this)
+            viewModel.setUserType(UserType.TRAINER)
             finish()
         }
     }
@@ -52,6 +55,7 @@ class SelectModeActivity : ParentActivity<ActivitySelectModeBinding>(ActivitySel
     private val setRunnerNameLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if(result.resultCode == Activity.RESULT_OK){
             RunnerMainActivity.startActivity(this)
+            viewModel.setUserType(UserType.RUNNER)
             finish()
         }
     }
