@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="orange_primary">#F76C1B</color>
+    <color name="orange_primary_variant">#FF5E00</color>
+    <color name="orange_secondary">#43aa8b</color>
+    <color name="orange_secondary_variant">#00FFB2</color>
 
 
 
