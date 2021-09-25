@@ -1,5 +1,7 @@
 package app.orienti.android.ui.screens.trainer.main
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -32,9 +34,11 @@ class TrainerMainActivity : AppCompatActivity() {
         ))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
-        RunnerMainActivity.startActivity(this)
     }
 
-
+    companion object {
+        fun startActivity(context: Context){
+            context.startActivity(Intent(context, TrainerMainActivity::class.java))
+        }
+    }
 }

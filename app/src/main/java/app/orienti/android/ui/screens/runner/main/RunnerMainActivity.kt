@@ -4,18 +4,13 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import app.orienti.android.R
 import app.orienti.android.databinding.ActivityMainRunnerBinding
+import com.google.android.material.snackbar.Snackbar
 
 class RunnerMainActivity : AppCompatActivity() {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainRunnerBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

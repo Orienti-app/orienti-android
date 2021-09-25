@@ -1,16 +1,21 @@
 <resources>
-    <string name="app_name">Orienti</string>
-
+    <string name="global_app_name">Orienti</string>
+    <string name="global_confirm">Confirm</string>
 
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
 
-    <string name="title_activity_main_trainer">Trainer</string>
-    <string name="title_activity_main_runner">Runner</string>
+    <string name="activity_main_trainer_label">Trainer</string>
 
-
+    <string name="activity_main_runner_label">Runner</string>
     <string name="menu_new_run">New run</string>
     <string name="menu_change_name">Change name</string>
     <string name="menu_change_mode">Change mode</string>
+
+    <string name="activity_set_name_label">Setting name</string>
+    <string name="activity_set_name_your_name">Your new name</string>
+
+
+    <string name="validation_enter_valid_name">Please enter valid name</string>
 </resources>

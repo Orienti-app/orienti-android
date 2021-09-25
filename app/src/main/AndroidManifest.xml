@@ -5,21 +5,34 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="@string/global_app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Orienti">
         <activity
+            android:name=".ui.screens.common.select_mode.SelectModeActivity"
+            android:theme="@style/Theme.Orienti.NoActionBar"
+            android:exported="true"/>
+        <activity
+            android:name=".ui.screens.common.set_name.SetNameActivity"
+            android:theme="@style/Theme.Orienti"
+            android:label="@string/activity_set_name_label"
+            android:exported="true"/>
+        <activity
             android:name="app.orienti.android.ui.screens.runner.main.RunnerMainActivity"
             android:exported="true"
-            android:label="@string/title_activity_main_runner" />
+            android:label="@string/activity_main_runner_label" />
         <activity
             android:name=".ui.screens.trainer.main.TrainerMainActivity"
             android:exported="true"
-            android:label="@string/title_activity_main_trainer">
+            android:label="@string/activity_main_trainer_label">
+        </activity>
+        <activity
+            android:name=".ui.screens.common.launcher.LauncherActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Orienti.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
