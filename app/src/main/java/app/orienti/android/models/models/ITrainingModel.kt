@@ -12,17 +12,14 @@ interface ITrainingModel : IModel<ModelsProvider> {
         val trainingId = UUID.randomUUID()
         val runnerId = UUID.randomUUID()
 
-//        val trainingData = TrainingData(
-//            Training(UUID.randomUUID(), name, Date()),
-//            listOf(
-//                Run(
-//                    Run(UUID.randomUUID(), trainingId, runnerId, Date(), Date()),
-//                    Runner(runnerId, "RunnerWiiii")
-//                )
-//            )
-//        )
+        val trainingData = TrainingData(
+            Training(trainingId, name, Date()),
+            listOf(
+                Run(UUID.randomUUID(), trainingId, runnerId, Date(), Date()),
+            )
+        )
 
-        trainingDao.insert(Training(UUID.randomUUID(), name, Date()))
+        trainingDao.insertTrainingData(listOf(trainingData))
 
         val insertedData = trainingDao.getAll()
 
