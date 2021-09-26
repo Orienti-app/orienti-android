@@ -54,4 +54,10 @@ data class ControlPoint(val id: UUID, val code: Int, val description: String)
 
 data class TrackControlPoints(val id: UUID, val trackId: UUID, val controlPointId: UUID)
 
-data class Track(val id: UUID, val name: String, val description: String)
+@Entity
+data class Track(
+    @PrimaryKey
+    val id: UUID,
+    val name: String,
+    val description: String
+    )

@@ -7,10 +7,11 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import app.orienti.android.entities.Run
 import app.orienti.android.entities.Runner
+import app.orienti.android.entities.Track
 import app.orienti.android.entities.Training
 import app.orienti.android.repositories.room.dao.TrainingDao
 
-@Database(entities = [Training::class, Run::class, Runner::class], version = 1)
+@Database(entities = [Training::class, Run::class, Runner::class, Track::class], version = 2)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun trainingDao(): TrainingDao
@@ -24,7 +25,7 @@ abstract class AppDatabase : RoomDatabase() {
 
             if(result == null){
                 result = Room.databaseBuilder(context, AppDatabase::class.java, "database")
-                    .fallbackToDestructiveMigrationFrom(1)
+                    .fallbackToDestructiveMigrationFrom(1,2)
                     .allowMainThreadQueries()
                     .build()
 
