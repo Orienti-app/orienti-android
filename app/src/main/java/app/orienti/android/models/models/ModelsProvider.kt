@@ -9,4 +9,10 @@ interface ModelsProvider : IModelsProvider {
             override val context: Context get() = this@ModelsProvider.context
             override val modelsProvider: ModelsProvider get() = this@ModelsProvider
         }
+
+    val trainingModel: ITrainingModel
+        get() = object : ITrainingModel {
+            override val context: Context get() = this@ModelsProvider.context
+            override val modelsProvider: ModelsProvider get() = this@ModelsProvider
+        }
 }

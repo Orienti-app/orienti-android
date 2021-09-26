@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -33,6 +34,11 @@ android {
 }
 
 dependencies {
+    kapt("androidx.room:room-compiler:2.3.0")
+    annotationProcessor "androidx.room:room-compiler:2.3.0"
+    implementation("androidx.room:room-runtime:2.3.0")
+    implementation("androidx.room:room-ktx:2.3.0")
+
     implementation 'com.github.backbonesk:parent:360e23fd'
     implementation platform('com.google.firebase:firebase-bom:26.1.0')
 
