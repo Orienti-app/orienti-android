@@ -36,7 +36,7 @@
         app:layout_constraintTop_toBottomOf="@id/logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@id/runner"
-        app:icon="@drawable/ic_baseline_run"
+        app:icon="@drawable/ic_baseline_whistle_24"
         app:iconGravity="end"
         android:text="@string/activity_main_trainer_label"/>
 

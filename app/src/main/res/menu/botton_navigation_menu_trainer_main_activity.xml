@@ -2,16 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/menu_trainer_bottom_navigation_trainings"
-        android:icon="@drawable/ic_home_black_24dp"
+        android:icon="@drawable/ic_baseline_whistle_24"
         android:title="@string/activity_main_trainer_trainings" />
 
     <item
         android:id="@+id/menu_trainer_bottom_navigation_tracks"
-        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:icon="@drawable/ic_baseline_track_24"
         android:title="@string/activity_main_trainer_tracks" />
 
     <item
         android:id="@+id/menu_trainer_bottom_navigation_control_points"
-        android:icon="@drawable/ic_notifications_black_24dp"
+        android:icon="@drawable/baseline_place_24"
         android:title="@string/activity_main_trainer_control_points" />
 </menu>
