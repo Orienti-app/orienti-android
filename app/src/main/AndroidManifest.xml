@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="app.orienti.android">
 
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,6 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Orienti"
         tools:ignore="LockedOrientationActivity">
+        <activity
+            android:name=".ui.screens.runner.start_run.StartRunActivity"
+            android:theme="@style/Theme.Orienti"
+            android:label="@string/menu_new_run"
+            android:screenOrientation="portrait"
+            android:exported="true" />
         <activity
             android:name=".ui.screens.common.select_mode.SelectModeActivity"
             android:theme="@style/Theme.Orienti.NoActionBar"

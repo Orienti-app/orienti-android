@@ -1,14 +1,17 @@
 package app.orienti.android.ui.screens.runner.main
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import app.orienti.android.R
 import app.orienti.android.databinding.ActivityMainRunnerBinding
 import app.orienti.android.ui.screens.common.select_mode.SelectModeActivity
 import app.orienti.android.ui.screens.common.set_name.SetNameActivity
+import app.orienti.android.ui.screens.runner.start_run.StartRunActivity
 import sk.backbone.parent.ui.components.LinearSpacingItemDecorationVertical
 import sk.backbone.parent.ui.screens.ParentActivity
 
@@ -32,6 +35,7 @@ class RunnerMainActivity : ParentActivity<ActivityMainRunnerBinding>(ActivityMai
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.context_menu_runner_main_activity_new_run -> {
+                newRunLauncher.launch(StartRunActivity.createIntent(this))
                 true
             }
             R.id.context_menu_runner_main_activity_change_name -> {
@@ -43,6 +47,12 @@ class RunnerMainActivity : ParentActivity<ActivityMainRunnerBinding>(ActivityMai
                 true
             }
             else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private val newRunLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if(result.resultCode == Activity.RESULT_OK){
+            return@registerForActivityResult
         }
     }
 
