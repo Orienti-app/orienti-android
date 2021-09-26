@@ -2,6 +2,7 @@ package app.orienti.android.ui.screens.runner.start_run
 
 import android.content.Context
 import android.content.Intent
+import app.orienti.android.entities.QRCodeParser
 import app.orienti.android.ui.screens.common.qr_scanning.QrAnalyzer
 import app.orienti.android.ui.screens.common.qr_scanning.QrScanningActivity
 import com.google.mlkit.vision.barcode.Barcode
@@ -13,8 +14,11 @@ class StartRunActivity: QrScanningActivity() {
             cameraProvider?.unbindAll()
             analyzer.close()
 
+            val qrcodeParser = QRCodeParser()
+            val qrRouteData = qrcodeParser.parse(this)
+
             val intent = Intent()
-            intent.putExtra(SCANNED_QR_VALUE_EXTRAS, this.toJsonString())
+            intent.putExtra(SCANNED_QR_VALUE_EXTRAS, qrRouteData.toJsonString())
             setResult(RESULT_OK, intent)
             finish()
         }
