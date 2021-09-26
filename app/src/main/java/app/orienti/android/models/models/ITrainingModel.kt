@@ -56,5 +56,6 @@ interface ITrainingModel : IModel<ModelsProvider> {
 
     }
 
-    fun getControlPoints(): List<ControlPoint> = trainingDao.getControlPoints()
+    fun getControlPoints() = trainingDao.getControlPoints()
+    fun getTracks() = trainingDao.getTracks()
 }
