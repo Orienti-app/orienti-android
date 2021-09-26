@@ -30,4 +30,5 @@
 
     <string name="validation_enter_valid_name">Please enter valid name</string>
     <string name="validation_enter_valid_code">Please enter valid code</string>
+    <string name="menu_scan_control_point">Scan control point</string>
 </resources>

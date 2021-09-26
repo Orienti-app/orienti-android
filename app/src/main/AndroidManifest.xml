@@ -14,7 +14,13 @@
         android:theme="@style/Theme.Orienti"
         tools:ignore="LockedOrientationActivity">
         <activity
-            android:name=".ui.screens.runner.start_run.StartRunActivity"
+            android:name=".ui.screens.runner.scan_control.ScanControlPointActivity"
+            android:theme="@style/Theme.Orienti"
+            android:label="@string/menu_scan_control_point"
+            android:screenOrientation="portrait"
+            android:exported="true" />
+        <activity
+            android:name=".ui.screens.runner.start_run.NewRunActivity"
             android:theme="@style/Theme.Orienti"
             android:label="@string/menu_new_run"
             android:screenOrientation="portrait"

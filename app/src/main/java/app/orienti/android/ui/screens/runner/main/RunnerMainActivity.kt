@@ -11,9 +11,11 @@ import app.orienti.android.R
 import app.orienti.android.databinding.ActivityMainRunnerBinding
 import app.orienti.android.ui.screens.common.select_mode.SelectModeActivity
 import app.orienti.android.ui.screens.common.set_name.SetNameActivity
-import app.orienti.android.ui.screens.runner.start_run.StartRunActivity
+import app.orienti.android.ui.screens.runner.scan_control.ScanControlPointActivity
+import app.orienti.android.ui.screens.runner.start_run.NewRunActivity
 import sk.backbone.parent.ui.components.LinearSpacingItemDecorationVertical
 import sk.backbone.parent.ui.screens.ParentActivity
+import sk.backbone.parent.utils.setSafeOnClickListener
 
 class RunnerMainActivity : ParentActivity<ActivityMainRunnerBinding>(ActivityMainRunnerBinding::inflate) {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,6 +25,10 @@ class RunnerMainActivity : ParentActivity<ActivityMainRunnerBinding>(ActivityMai
         viewBinding.controlPointsRecycler.addItemDecoration(LinearSpacingItemDecorationVertical(resources.getDimension(R.dimen.spacing_default_15_dp).toInt()))
         viewBinding.controlPointsRecycler.adapter = ControlPointsAdapter(this).apply {
             replaceDataSet(listOf(true, true, false, true, false, true, false, true, false, true, false, true, false, true, false))
+        }
+
+        viewBinding.scan.setSafeOnClickListener {
+            scanControlPointLauncher.launch(ScanControlPointActivity.createIntent(it.context))
         }
     }
 
@@ -35,7 +41,7 @@ class RunnerMainActivity : ParentActivity<ActivityMainRunnerBinding>(ActivityMai
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.context_menu_runner_main_activity_new_run -> {
-                newRunLauncher.launch(StartRunActivity.createIntent(this))
+                newRunLauncher.launch(NewRunActivity.createIntent(this))
                 true
             }
             R.id.context_menu_runner_main_activity_change_name -> {
@@ -47,6 +53,12 @@ class RunnerMainActivity : ParentActivity<ActivityMainRunnerBinding>(ActivityMai
                 true
             }
             else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private val scanControlPointLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if(result.resultCode == Activity.RESULT_OK){
+            return@registerForActivityResult
         }
     }
 

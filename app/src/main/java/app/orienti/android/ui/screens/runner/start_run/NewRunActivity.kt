@@ -8,7 +8,7 @@ import app.orienti.android.ui.screens.common.qr_scanning.QrScanningActivity
 import com.google.mlkit.vision.barcode.Barcode
 import sk.backbone.parent.utils.toJsonString
 
-class StartRunActivity: QrScanningActivity() {
+class NewRunActivity: QrScanningActivity() {
     override fun onCodeScanned(analyzer: QrAnalyzer, barcode: Barcode) {
         val qrRouteData = QRCodeParser.parseTrackDefinition(barcode.rawValue)
 
@@ -25,7 +25,7 @@ class StartRunActivity: QrScanningActivity() {
 
     companion object {
         fun createIntent(context: Context): Intent {
-            return Intent(context, StartRunActivity::class.java)
+            return Intent(context, NewRunActivity::class.java)
         }
     }
 }
