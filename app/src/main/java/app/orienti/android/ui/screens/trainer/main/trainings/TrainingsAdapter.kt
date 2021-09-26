@@ -7,8 +7,10 @@ import app.orienti.android.R
 import app.orienti.android.databinding.UiComponentControlPointRowBinding
 import app.orienti.android.databinding.UiComponentTextRowBinding
 import app.orienti.android.entities.db_entities.joined.TrainingData
+import app.orienti.android.ui.screens.trainer.training_detail.TrainingDetailActivity
 import sk.backbone.parent.ui.screens.ParentRecyclerAdapter
 import sk.backbone.parent.utils.getDifferenceIn24HFormat
+import sk.backbone.parent.utils.setSafeOnClickListener
 import java.util.*
 
 class TrainingsAdapter(context: Context): ParentRecyclerAdapter<TrainingData, TrainingsAdapter.ControlPointViewHolder>(context) {
@@ -19,6 +21,10 @@ class TrainingsAdapter(context: Context): ParentRecyclerAdapter<TrainingData, Tr
     class ControlPointViewHolder(private val viewBinding: UiComponentTextRowBinding): ParentRecyclerViewHolder<TrainingData>(viewBinding.root) {
         override fun bindData(viewData: TrainingData) {
             viewBinding.name.text = viewData.training.name
+
+            viewBinding.root.setSafeOnClickListener {
+                TrainingDetailActivity.startActivity(it.context, viewData)
+            }
         }
     }
 }

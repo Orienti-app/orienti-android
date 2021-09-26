@@ -14,6 +14,17 @@
         android:theme="@style/Theme.Orienti"
         tools:ignore="LockedOrientationActivity">
         <activity
+            android:name=".ui.screens.trainer.training_detail.TrainingDetailActivity"
+            android:theme="@style/Theme.Orienti"
+            android:screenOrientation="portrait"
+            android:exported="true" />
+        <activity
+            android:name=".ui.screens.trainer.scan_run.ScanRunActivity"
+            android:theme="@style/Theme.Orienti"
+            android:label="@string/menu_scan_run"
+            android:screenOrientation="portrait"
+            android:exported="true" />
+        <activity
             android:name=".ui.screens.runner.scan_control.ScanControlPointActivity"
             android:theme="@style/Theme.Orienti"
             android:label="@string/menu_scan_control_point"
