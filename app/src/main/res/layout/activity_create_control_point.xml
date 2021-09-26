@@ -24,7 +24,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/name"
-        app:icon="@drawable/ic_baseline_run"
+        app:icon="@drawable/ic_baseline_done_24"
         android:text="@string/global_confirm"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
