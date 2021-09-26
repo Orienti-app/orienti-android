@@ -13,6 +13,7 @@ interface ITrainingModel : IModel<ModelsProvider> {
     val trainingDao get() = AppDatabase.getDatabase(context).trainingDao()
 
     fun getTrainingData(): List<TrainingData> = trainingDao.getTrainingData()
+    fun getTrainingDataForTraining(trainingId: UUID): TrainingData = trainingDao.getTrainingDataForTraining(trainingId)
 
     fun createTraining(name: String): Training {
         val training = Training(UUID.randomUUID(), name, Date(), Date())
@@ -32,8 +33,8 @@ interface ITrainingModel : IModel<ModelsProvider> {
         return controlPoint
     }
 
-    fun addRunToTraining(training: Training, runData: RunData){
-
+    fun addRunData(runData: RunData){
+        trainingDao.addRunDataToTraining(runData)
     }
 
     fun addControlPointToTrack(){
@@ -58,4 +59,5 @@ interface ITrainingModel : IModel<ModelsProvider> {
 
     fun getControlPoints() = trainingDao.getControlPoints()
     fun getTracks() = trainingDao.getTracks()
+    fun getRunsDataForTraining(trainingId: UUID): List<RunData> = trainingDao.getRunsDataForTraining(trainingId)
 }

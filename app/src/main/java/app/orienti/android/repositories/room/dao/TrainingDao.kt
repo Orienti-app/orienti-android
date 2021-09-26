@@ -22,6 +22,9 @@ interface TrainingDao {
     @Query("SELECT * FROM `ControlPoint`")
     fun getControlPoints(): List<ControlPoint>
 
+    @Query("SELECT * FROM `Training` WHERE id == :trainingId")
+    fun getTrainingById(trainingId: UUID): Training
+
     @Transaction
     @Query("SELECT * FROM `Run` WHERE trainingId == :trainingId")
     fun getRunsDataForTraining(trainingId: UUID): List<RunData>
@@ -29,6 +32,12 @@ interface TrainingDao {
     ///////////
     // JOINS //
     ///////////
+
+    @Transaction
+    fun getTrainingDataForTraining(trainingId: UUID): TrainingData {
+        val training = getTrainingById(trainingId)
+        return TrainingData(training, getRunsDataForTraining(training.id))
+    }
 
     @Transaction
     fun getTrainingData(): List<TrainingData>{
@@ -62,5 +71,12 @@ interface TrainingDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(trackControlPoints: TrackControlPoints)
+
+    @Transaction
+    fun addRunDataToTraining(runData: RunData) {
+        insert(runData.track)
+        insert(runData.runner)
+        insert(runData.run)
+    }
 }
 

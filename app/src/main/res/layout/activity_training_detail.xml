@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/control_points_recycler"
+        android:id="@+id/recycler"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
