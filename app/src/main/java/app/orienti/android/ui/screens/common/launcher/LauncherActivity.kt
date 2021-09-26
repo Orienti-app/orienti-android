@@ -17,8 +17,6 @@ class LauncherActivity : ParentActivity<ViewBinding>(null) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val wiii = viewModel.createTraining("TrainingWiiiiiii")
-
         when(viewModel.getUserType()){
             UserType.NONE -> SelectModeActivity.startActivity(this)
             UserType.RUNNER -> RunnerMainActivity.startActivity(this)

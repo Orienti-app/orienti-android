@@ -1,50 +1,66 @@
 package app.orienti.android.repositories.room.dao
 
 import androidx.room.*
-import app.orienti.android.entities.*
+import app.orienti.android.entities.db_entities.*
+import app.orienti.android.entities.db_entities.joined.RunData
+import app.orienti.android.entities.db_entities.joined.TrainingData
+import java.util.*
 
 @Dao
 interface TrainingDao {
-    @Transaction
-    fun insertTrainingData(trainings: List<TrainingData>){
-        // Todo: Foreach entity insert
 
-        insertTrainings(trainings.map { x -> x.training })
-
-        trainings.forEach { trainingData ->
-            insertTraining(trainingData.training)
-            trainingData.runs.forEach { run ->
-                insertRun(run)
-            }
-        }
-
-        // ...
-        // ...
-        // ...
-    }
-
-    @Transaction
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertTrainings(trainings: List<Training>)
-
-    @Transaction
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertTraining(trainingData: Training)
+    //////////////////////
+    // SELECTING OBJECTS//
+    //////////////////////
 
     @Query("SELECT * FROM `Training`")
-    fun getAll(): List<TrainingData>
+    fun getTrainings(): List<Training>
+
+    @Query("SELECT * FROM `Track`")
+    fun getTracks(): List<Track>
+
+    @Query("SELECT * FROM `ControlPoint`")
+    fun getControlPoints(): List<ControlPoint>
 
     @Transaction
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertRunner(runner: Runner)
+    @Query("SELECT * FROM `Run` WHERE trainingId == :trainingId")
+    fun getRunsDataForTraining(trainingId: UUID): List<RunData>
+
+    ///////////
+    // JOINS //
+    ///////////
 
     @Transaction
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertRun(run: Run)
+    fun getTrainingData(): List<TrainingData>{
+        val trainingData = getTrainings().map { training ->
+            TrainingData(training, getRunsDataForTraining(training.id))
+        }
+
+        return trainingData
+    }
 
 
-    @Transaction
+    // SINGLE OBJECT INSERTS
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertTrack(track: Track)
+    fun insert(trainingData: Training)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(runner: Runner)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(run: Run)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(track: Track)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(controlPoint: ControlPoint)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(runControlPoints: RunControlPoints)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(trackControlPoints: TrackControlPoints)
 }
 

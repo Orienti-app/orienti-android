@@ -11,6 +11,7 @@
     <string name="global_tack_name">Tack name</string>
     <string name="global_new_track">New track</string>
     <string name="global_new_control_point">New control point</string>
+    <string name="global_control_point_code">Code</string>
 
     <string name="menu_new_run">New run</string>
     <string name="menu_change_name">Change name</string>
@@ -28,4 +29,5 @@
     <string name="activity_set_name_your_name">Your new name</string>
 
     <string name="validation_enter_valid_name">Please enter valid name</string>
+    <string name="validation_enter_valid_code">Please enter valid code</string>
 </resources>

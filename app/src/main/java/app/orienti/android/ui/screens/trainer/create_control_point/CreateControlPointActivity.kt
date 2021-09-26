@@ -29,12 +29,19 @@ class CreateControlPointActivity: ParentActivity<ActivityCreateControlPointBindi
 
         viewBinding.confirmButton.setSafeOnClickListener {
             val name = viewBinding.name.text
-            if(name?.trim()?.isEmpty() == true){
-                Toast.makeText(this, getString(R.string.validation_enter_valid_name), Toast.LENGTH_LONG).show()
-            } else {
-                viewModel.setUserName(name)
-                setResult(Activity.RESULT_OK)
-                finish()
+            val code = viewBinding.code.text?.toIntOrNull()
+            when {
+                name?.trim()?.isNotEmpty() != true -> {
+                    Toast.makeText(this, getString(R.string.validation_enter_valid_name), Toast.LENGTH_LONG).show()
+                }
+                code == null -> {
+                    Toast.makeText(this, getString(R.string.validation_enter_valid_name), Toast.LENGTH_LONG).show()
+                }
+                else -> {
+                    viewModel.createControlPoint(name, code)
+                    setResult(Activity.RESULT_OK)
+                    finish()
+                }
             }
         }
     }

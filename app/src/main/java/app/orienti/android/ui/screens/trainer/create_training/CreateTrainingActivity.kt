@@ -28,10 +28,10 @@ class CreateTrainingActivity: ParentActivity<ActivityCreateTrainingBinding>(Acti
 
         viewBinding.confirmButton.setSafeOnClickListener {
             val name = viewBinding.name.text
-            if(name?.trim()?.isEmpty() == true){
+            if(name?.trim()?.isNotEmpty() != true){
                 Toast.makeText(this, getString(R.string.validation_enter_valid_name), Toast.LENGTH_LONG).show()
             } else {
-                viewModel.setUserName(name)
+                viewModel.createTraining(name)
                 setResult(Activity.RESULT_OK)
                 finish()
             }
