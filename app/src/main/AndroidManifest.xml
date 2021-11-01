@@ -17,43 +17,42 @@
         <activity
             android:name=".ui.screens.trainer.training_detail.TrainingDetailActivity"
             android:theme="@style/Theme.Orienti"
-            android:screenOrientation="portrait"
-            android:exported="true" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.screens.trainer.scan_run.ScanRunActivity"
             android:theme="@style/Theme.Orienti"
             android:label="@string/menu_scan_run"
-            android:screenOrientation="portrait"
-            android:exported="true" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.screens.runner.scan_control.ScanControlPointActivity"
             android:theme="@style/Theme.Orienti"
             android:label="@string/menu_scan_control_point"
-            android:screenOrientation="portrait"
-            android:exported="true" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.screens.runner.start_run.NewRunActivity"
             android:theme="@style/Theme.Orienti"
             android:label="@string/menu_new_run"
-            android:screenOrientation="portrait"
-            android:exported="true" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.screens.common.select_mode.SelectModeActivity"
             android:theme="@style/Theme.Orienti.NoActionBar"
-            android:screenOrientation="portrait"
-            android:exported="true" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.screens.trainer.create_training.CreateTrainingActivity"
             android:theme="@style/Theme.Orienti"
             android:label="@string/global_new_training"
-            android:screenOrientation="portrait"
-            android:exported="true" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.screens.trainer.create_track.CreateTrackActivity"
             android:theme="@style/Theme.Orienti"
             android:label="@string/global_new_track"
-            android:screenOrientation="portrait"
-            android:exported="true" />
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".ui.screens.trainer.track_detail.TrackDetailActivity"
+            android:theme="@style/Theme.Orienti"
+            android:label="@string/global_new_track"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".ui.screens.trainer.create_control_point.CreateControlPointActivity"
@@ -65,8 +64,7 @@
             android:name=".ui.screens.common.set_name.SetNameActivity"
             android:theme="@style/Theme.Orienti"
             android:screenOrientation="portrait"
-            android:label="@string/activity_set_name_label"
-            android:exported="true"/>
+            android:label="@string/activity_set_name_label" />
         <activity
             android:name="app.orienti.android.ui.screens.runner.main.RunnerMainActivity"
             android:exported="true"

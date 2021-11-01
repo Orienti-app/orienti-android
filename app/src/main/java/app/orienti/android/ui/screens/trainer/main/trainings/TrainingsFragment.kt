@@ -22,9 +22,10 @@ class TrainingsFragment : ParentFragment<FragmentTrainingsBinding>(FragmentTrain
 
         if (adapter == null){
             adapter = TrainingsAdapter(view.context)
-            viewBinding.recycler.adapter = adapter
-            viewBinding.recycler.layoutManager = LinearLayoutManager(view.context)
         }
+
+        viewBinding.recycler.adapter = adapter
+        viewBinding.recycler.layoutManager = LinearLayoutManager(view.context)
 
         viewBinding.add.setSafeOnClickListener {
             CreateTrainingActivity.startActivity(it.context)

@@ -8,7 +8,7 @@ import java.util.*
 data class ControlPoint(
     @PrimaryKey
     val id: UUID,
-    val code: Int,
+    val code: String,
     val name: String,
     val updatedAt: Date
 )

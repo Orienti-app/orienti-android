@@ -16,7 +16,7 @@ import app.orienti.android.repositories.room.dao.TrainingDao
     TrackControlPoints::class,
     RunControlPoints::class,
     ControlPoint::class
-                     ], version = 3, exportSchema = false)
+                     ], version = 4, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun trainingDao(): TrainingDao
@@ -30,7 +30,7 @@ abstract class AppDatabase : RoomDatabase() {
 
             if(result == null){
                 result = Room.databaseBuilder(context, AppDatabase::class.java, "database")
-                    .fallbackToDestructiveMigrationFrom(1, 2, 3)
+                    .fallbackToDestructiveMigrationFrom(1, 2, 3, 4)
                     .allowMainThreadQueries()
                     .build()
 

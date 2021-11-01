@@ -29,6 +29,10 @@ interface TrainingDao {
     @Query("SELECT * FROM `Run` WHERE trainingId == :trainingId")
     fun getRunsDataForTraining(trainingId: UUID): List<RunData>
 
+    @Query("SELECT * FROM `Track` WHERE id == :trackId")
+    fun getTrackData(trackId: UUID): Track
+
+
     ///////////
     // JOINS //
     ///////////

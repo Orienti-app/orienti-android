@@ -23,9 +23,10 @@ class TracksFragment : ParentFragment<FragmentTracksBinding>(FragmentTracksBindi
 
         if (adapter == null){
             adapter = TracksAdapter(view.context)
-            viewBinding.recycler.adapter = adapter
-            viewBinding.recycler.layoutManager = LinearLayoutManager(view.context)
         }
+
+        viewBinding.recycler.adapter = adapter
+        viewBinding.recycler.layoutManager = LinearLayoutManager(view.context)
 
         viewBinding.add.setSafeOnClickListener {
             CreateTrackActivity.startActivity(it.context)

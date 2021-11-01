@@ -22,9 +22,10 @@ class ControlPointsFragment : ParentFragment<FragmentControlPointsBinding>(Fragm
 
         if (adapter == null){
             adapter = ControlPointsAdapter(view.context)
-            viewBinding.recycler.adapter = adapter
-            viewBinding.recycler.layoutManager = LinearLayoutManager(view.context)
         }
+
+        viewBinding.recycler.adapter = adapter
+        viewBinding.recycler.layoutManager = LinearLayoutManager(view.context)
 
         viewBinding.add.setSafeOnClickListener {
             CreateControlPointActivity.startActivity(it.context)

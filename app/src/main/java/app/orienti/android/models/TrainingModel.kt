@@ -31,7 +31,7 @@ class TrainingModel @Inject constructor(@ApplicationContext val context: Context
         return track
     }
 
-    fun createControlPoint(name: String, code: Int): ControlPoint {
+    fun createControlPoint(name: String, code: String): ControlPoint {
         val controlPoint = ControlPoint(UUID.randomUUID(), code, name, Date())
         trainingDao.insert(controlPoint)
         return controlPoint
@@ -64,4 +64,5 @@ class TrainingModel @Inject constructor(@ApplicationContext val context: Context
     fun getControlPoints() = trainingDao.getControlPoints()
     fun getTracks() = trainingDao.getTracks()
     fun getRunsDataForTraining(trainingId: UUID): List<RunData> = trainingDao.getRunsDataForTraining(trainingId)
+    fun getTrackDetail(trackId: UUID): Track = trainingDao.getTrackData(trackId)
 }

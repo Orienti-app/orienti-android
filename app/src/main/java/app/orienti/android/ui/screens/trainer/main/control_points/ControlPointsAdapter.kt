@@ -18,7 +18,7 @@ class ControlPointsAdapter(context: Context): ParentRecyclerAdapter<ControlPoint
 
     class ControlPointViewHolder(private val viewBinding: UiComponentTextRowBinding): ParentRecyclerViewHolder<ControlPoint>(viewBinding.root) {
         override fun bindData(viewData: ControlPoint) {
-            viewBinding.name.text = viewData.code.toString()
+            viewBinding.name.text = viewData.code
         }
     }
 }
