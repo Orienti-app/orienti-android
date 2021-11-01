@@ -3,8 +3,10 @@ package app.orienti.android.models
 import android.content.Context
 import app.orienti.android.entities.db_entities.ControlPoint
 import app.orienti.android.entities.db_entities.Track
+import app.orienti.android.entities.db_entities.TrackControlPoint
 import app.orienti.android.entities.db_entities.Training
 import app.orienti.android.entities.db_entities.joined.RunData
+import app.orienti.android.entities.db_entities.joined.TrackData
 import app.orienti.android.entities.db_entities.joined.TrainingData
 import app.orienti.android.repositories.room.AppDatabase
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -41,8 +43,8 @@ class TrainingModel @Inject constructor(@ApplicationContext val context: Context
         trainingDao.addRunDataToTraining(runData)
     }
 
-    fun addControlPointToTrack(){
-
+    fun addControlPointToTrack(track: Track, controlPoint: ControlPoint){
+        trainingDao.insert(TrackControlPoint(track.id, controlPoint.id))
     }
 
     fun removeTraining(){
@@ -64,5 +66,5 @@ class TrainingModel @Inject constructor(@ApplicationContext val context: Context
     fun getControlPoints() = trainingDao.getControlPoints()
     fun getTracks() = trainingDao.getTracks()
     fun getRunsDataForTraining(trainingId: UUID): List<RunData> = trainingDao.getRunsDataForTraining(trainingId)
-    fun getTrackDetail(trackId: UUID): Track = trainingDao.getTrackData(trackId)
+    fun getTrackDetail(trackId: UUID): TrackData = trainingDao.getTrackData(trackId)
 }

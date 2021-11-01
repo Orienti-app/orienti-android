@@ -57,6 +57,9 @@ class TrainingDetailActivity: ParentActivity<ActivityTrainingDetailBinding>(Acti
             adapter?.replaceDataSet(this.runs)
         }
 
+
+        // Todo: Remove it
+        // Just for testing showcases
         training?.let {
             val track = Track(UUID.randomUUID(), "Wiiii", Date())
             val runner = Runner(UUID.randomUUID(), "Wiiii")

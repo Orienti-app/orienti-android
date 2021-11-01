@@ -3,6 +3,7 @@ package app.orienti.android.repositories.room.dao
 import androidx.room.*
 import app.orienti.android.entities.db_entities.*
 import app.orienti.android.entities.db_entities.joined.RunData
+import app.orienti.android.entities.db_entities.joined.TrackData
 import app.orienti.android.entities.db_entities.joined.TrainingData
 import java.util.*
 
@@ -22,15 +23,15 @@ interface TrainingDao {
     @Query("SELECT * FROM `ControlPoint`")
     fun getControlPoints(): List<ControlPoint>
 
-    @Query("SELECT * FROM `Training` WHERE id == :trainingId")
+    @Query("SELECT * FROM `Training` WHERE trainingId == :trainingId")
     fun getTrainingById(trainingId: UUID): Training
 
     @Transaction
     @Query("SELECT * FROM `Run` WHERE trainingId == :trainingId")
     fun getRunsDataForTraining(trainingId: UUID): List<RunData>
 
-    @Query("SELECT * FROM `Track` WHERE id == :trackId")
-    fun getTrackData(trackId: UUID): Track
+    @Query("SELECT * FROM `Track` WHERE trackId == :trackId")
+    fun getTrack(trackId: UUID): Track
 
 
     ///////////
@@ -51,6 +52,10 @@ interface TrainingDao {
 
         return trainingData
     }
+
+    @Transaction
+    @Query("SELECT * FROM 'Track' WHERE trackId == :trackId LIMIT 1")
+    fun getTrackData(trackId: UUID): TrackData
 
 
     // SINGLE OBJECT INSERTS
@@ -74,7 +79,7 @@ interface TrainingDao {
     fun insert(runControlPoints: RunControlPoints)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(trackControlPoints: TrackControlPoints)
+    fun insert(trackControlPoint: TrackControlPoint)
 
     @Transaction
     fun addRunDataToTraining(runData: RunData) {

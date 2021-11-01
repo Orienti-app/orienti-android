@@ -10,9 +10,9 @@ data class RunData(
     @Embedded
     val run: Run,
 
-    @Relation(parentColumn =  "runnerId", entityColumn = "id")
+    @Relation(parentColumn = "runnerId", entityColumn = "runnerId")
     val runner: Runner,
 
-    @Relation(parentColumn =  "trackId", entityColumn = "id")
+    @Relation(parentColumn = "trackId", entityColumn = "trackId")
     val track: Track
     )

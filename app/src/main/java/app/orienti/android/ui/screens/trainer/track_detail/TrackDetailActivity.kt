@@ -5,10 +5,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import app.orienti.android.databinding.ActivityTrackDetailBinding
+import app.orienti.android.entities.db_entities.Run
+import app.orienti.android.entities.db_entities.Runner
 import app.orienti.android.entities.db_entities.Track
+import app.orienti.android.entities.db_entities.joined.RunData
+import app.orienti.android.entities.db_entities.joined.TrackData
 import app.orienti.android.models.TrainingModel
 import dagger.hilt.android.AndroidEntryPoint
-import hilt_aggregated_deps._app_orienti_android_ui_screens_trainer_main_trainings_TrainingsFragment_GeneratedInjector
 import sk.backbone.parent.ui.screens.ActivityTransitions
 import sk.backbone.parent.ui.screens.ParentActivity
 import sk.backbone.parent.utils.setSafeOnClickListener
@@ -18,6 +21,8 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class TrackDetailActivity: ParentActivity<ActivityTrackDetailBinding>(ActivityTrackDetailBinding::inflate) {
     @Inject lateinit var trainingModel: TrainingModel
+
+    var trackData: TrackData? = null
 
     override fun getActivityTransitions(): ActivityTransitions = ActivityTransitions.BOTTOM_TOP
 
@@ -30,9 +35,11 @@ class TrackDetailActivity: ParentActivity<ActivityTrackDetailBinding>(ActivityTr
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val track = trainingModel.getTrackDetail(trackId)
+        trackData = trainingModel.getTrackDetail(trackId)
 
-        title = track.name
+        trackData?.let {
+            title = it.track.name
+        }
 
         viewBinding.add.setSafeOnClickListener {
             // Todo: Add control point
@@ -47,6 +54,16 @@ class TrackDetailActivity: ParentActivity<ActivityTrackDetailBinding>(ActivityTr
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        trackData?.let { trackData ->
+            trainingModel.getControlPoints().forEach {
+                trainingModel.addControlPointToTrack(trackData.track, it)
+            }
+        }
     }
 
     companion object {
