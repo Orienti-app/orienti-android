@@ -6,8 +6,10 @@ import app.orienti.android.ui.screens.common.qr_scanning.utils.QRCodeParser
 import app.orienti.android.ui.screens.common.qr_scanning.QrAnalyzer
 import app.orienti.android.ui.screens.common.qr_scanning.QrScanningActivity
 import com.google.mlkit.vision.barcode.Barcode
+import dagger.hilt.android.AndroidEntryPoint
 import sk.backbone.parent.utils.toJsonString
 
+@AndroidEntryPoint
 class NewRunActivity: QrScanningActivity() {
     override fun onCodeScanned(analyzer: QrAnalyzer, barcode: Barcode) {
         val qrRouteData = QRCodeParser.parseTrackDefinition(barcode.rawValue)

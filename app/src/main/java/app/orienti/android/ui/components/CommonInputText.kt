@@ -8,9 +8,11 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import app.orienti.android.R
 import app.orienti.android.databinding.CommonInputTextBinding
-import sk.backbone.parent.ui.components.StateSavingLinearLayout
+import dagger.hilt.android.AndroidEntryPoint
+import sk.backbone.parent.ui.components.ParentLinearLayout
 
-open class CommonInputText @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : StateSavingLinearLayout(context, attrs, defStyleAttr) {
+@AndroidEntryPoint
+open class CommonInputText @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : ParentLinearLayout(context, attrs, defStyleAttr) {
     private val viewBinding: CommonInputTextBinding by lazy {
         CommonInputTextBinding.inflate(LayoutInflater.from(context), this, true)
     }

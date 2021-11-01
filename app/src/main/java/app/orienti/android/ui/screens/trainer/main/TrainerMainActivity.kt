@@ -15,8 +15,9 @@ import app.orienti.android.databinding.ActivityMainTrainerBinding
 import app.orienti.android.ui.screens.common.select_mode.SelectModeActivity
 import app.orienti.android.ui.screens.common.set_name.SetNameActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class TrainerMainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainTrainerBinding

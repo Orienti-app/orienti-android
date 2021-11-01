@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import app.orienti.android.databinding.ActivityTrainingDetailBinding
@@ -13,18 +14,21 @@ import app.orienti.android.entities.db_entities.Track
 import app.orienti.android.entities.db_entities.Training
 import app.orienti.android.entities.db_entities.joined.RunData
 import app.orienti.android.entities.db_entities.joined.TrainingData
-import app.orienti.android.ui.base.DefaultViewModel
+import app.orienti.android.models.TrainingModel
 import app.orienti.android.ui.screens.trainer.scan_run.ScanRunActivity
+import dagger.hilt.android.AndroidEntryPoint
 import sk.backbone.parent.ui.screens.ParentActivity
 import sk.backbone.parent.utils.setSafeOnClickListener
 import java.util.*
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class TrainingDetailActivity: ParentActivity<ActivityTrainingDetailBinding>(ActivityTrainingDetailBinding::inflate) {
     private val trainingId: UUID by lazy {
         intent.getSerializableExtra(TRAINING_ID_DATA_EXTRAS) as UUID
     }
 
-    private val viewModel by lazy { getViewModel<DefaultViewModel>() }
+    @Inject lateinit var trainingModel: TrainingModel
 
     private var adapter: RunsAdapter? = null
     private var training: Training? = null
@@ -47,7 +51,7 @@ class TrainingDetailActivity: ParentActivity<ActivityTrainingDetailBinding>(Acti
     override fun onResume() {
         super.onResume()
 
-        viewModel.getTrainingDataForTraining(trainingId).apply {
+        trainingModel.getTrainingDataForTraining(trainingId).apply {
             this@TrainingDetailActivity.training = training
             title = this.training.name
             adapter?.replaceDataSet(this.runs)
@@ -61,8 +65,18 @@ class TrainingDetailActivity: ParentActivity<ActivityTrainingDetailBinding>(Acti
                 Run(UUID.randomUUID(), track.id, trainingId, runner.id, Date(), Date()), runner, track
             )
 
-            viewModel.addRunData(runData)
+            trainingModel.addRunData(runData)
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private val scanRunLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->

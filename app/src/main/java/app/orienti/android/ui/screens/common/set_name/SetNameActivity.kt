@@ -8,16 +8,17 @@ import android.view.MenuItem
 import android.widget.Toast
 import app.orienti.android.R
 import app.orienti.android.databinding.ActivitySetNameBinding
-import app.orienti.android.ui.base.DefaultViewModel
+import app.orienti.android.models.UserModel
 import app.orienti.android.ui.screens.trainer.create_track.CreateTrackActivity
+import dagger.hilt.android.AndroidEntryPoint
 import sk.backbone.parent.ui.screens.ActivityTransitions
 import sk.backbone.parent.ui.screens.ParentActivity
 import sk.backbone.parent.utils.setSafeOnClickListener
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class SetNameActivity: ParentActivity<ActivitySetNameBinding>(ActivitySetNameBinding::inflate) {
-    private val viewModel by lazy {
-        getViewModel<DefaultViewModel>()
-    }
+    @Inject lateinit var userModel: UserModel
 
     override fun getActivityTransitions(): ActivityTransitions = ActivityTransitions.BOTTOM_TOP
 
@@ -26,7 +27,7 @@ class SetNameActivity: ParentActivity<ActivitySetNameBinding>(ActivitySetNameBin
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        viewModel.getUserName()?.let {
+        userModel.getUserName()?.let {
             viewBinding.name.text = it
         }
 
@@ -35,7 +36,7 @@ class SetNameActivity: ParentActivity<ActivitySetNameBinding>(ActivitySetNameBin
             if(name?.trim()?.isNotEmpty() != true){
                 Toast.makeText(this, getString(R.string.validation_enter_valid_name), Toast.LENGTH_LONG).show()
             } else {
-                viewModel.setUserName(name)
+                userModel.setUserName(name)
                 setResult(Activity.RESULT_OK)
                 finish()
             }
@@ -54,7 +55,7 @@ class SetNameActivity: ParentActivity<ActivitySetNameBinding>(ActivitySetNameBin
 
     companion object {
         fun getStartingIntent(context: Context): Intent {
-            return Intent(context, CreateTrackActivity::class.java)
+            return Intent(context, SetNameActivity::class.java)
         }
 
         fun startActivity(context: Context) {

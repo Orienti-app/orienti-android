@@ -4,14 +4,16 @@ import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import app.orienti.android.databinding.FragmentTrainingsBinding
-import app.orienti.android.ui.base.DefaultViewModel
+import app.orienti.android.models.TrainingModel
 import app.orienti.android.ui.screens.trainer.create_training.CreateTrainingActivity
-import app.orienti.android.ui.screens.trainer.main.tracks.TracksAdapter
+import dagger.hilt.android.AndroidEntryPoint
 import sk.backbone.parent.ui.screens.ParentFragment
 import sk.backbone.parent.utils.setSafeOnClickListener
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class TrainingsFragment : ParentFragment<FragmentTrainingsBinding>(FragmentTrainingsBinding::inflate) {
-    private val viewModel by lazy { getViewModel<DefaultViewModel>() }
+    @Inject lateinit var trainingModel: TrainingModel
 
     var adapter: TrainingsAdapter? = null
 
@@ -32,6 +34,6 @@ class TrainingsFragment : ParentFragment<FragmentTrainingsBinding>(FragmentTrain
     override fun onResume() {
         super.onResume()
 
-        adapter?.replaceDataSet(viewModel.getTrainingData())
+        adapter?.replaceDataSet(trainingModel.getTrainingData())
     }
 }

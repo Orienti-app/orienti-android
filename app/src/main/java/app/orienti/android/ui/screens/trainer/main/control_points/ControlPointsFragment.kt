@@ -2,17 +2,18 @@ package app.orienti.android.ui.screens.trainer.main.control_points
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import app.orienti.android.databinding.FragmentControlPointsBinding
-import app.orienti.android.ui.base.DefaultViewModel
+import app.orienti.android.models.TrainingModel
 import app.orienti.android.ui.screens.trainer.create_control_point.CreateControlPointActivity
-import app.orienti.android.ui.screens.trainer.create_training.CreateTrainingActivity
+import dagger.hilt.android.AndroidEntryPoint
 import sk.backbone.parent.ui.screens.ParentFragment
 import sk.backbone.parent.utils.setSafeOnClickListener
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class ControlPointsFragment : ParentFragment<FragmentControlPointsBinding>(FragmentControlPointsBinding::inflate) {
-    private val viewModel by lazy { getViewModel<DefaultViewModel>() }
+    @Inject lateinit var trainingModel: TrainingModel
 
     var adapter: ControlPointsAdapter? = null
 
@@ -33,6 +34,6 @@ class ControlPointsFragment : ParentFragment<FragmentControlPointsBinding>(Fragm
     override fun onResume() {
         super.onResume()
 
-        adapter?.replaceDataSet(viewModel.getControlPoints())
+        adapter?.replaceDataSet(trainingModel.getControlPoints())
     }
 }

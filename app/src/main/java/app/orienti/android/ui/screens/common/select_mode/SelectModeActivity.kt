@@ -7,19 +7,20 @@ import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import app.orienti.android.databinding.ActivitySelectModeBinding
 import app.orienti.android.entities.UserType
-import app.orienti.android.ui.base.DefaultViewModel
+import app.orienti.android.models.UserModel
 import app.orienti.android.ui.screens.common.set_name.SetNameActivity
 import app.orienti.android.ui.screens.runner.main.RunnerMainActivity
 import app.orienti.android.ui.screens.trainer.main.TrainerMainActivity
+import dagger.hilt.android.AndroidEntryPoint
 import sk.backbone.parent.ui.screens.ParentActivity
 import sk.backbone.parent.utils.setSafeOnClickListener
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class SelectModeActivity : ParentActivity<ActivitySelectModeBinding>(ActivitySelectModeBinding::inflate) {
-    private val viewModel by lazy {
-        getViewModel<DefaultViewModel>()
-    }
+    @Inject lateinit var userModel: UserModel
 
-    private val hasEnteredName get() = viewModel.hasUserName()
+    private val hasEnteredName get() = userModel.hasUserName()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +30,7 @@ class SelectModeActivity : ParentActivity<ActivitySelectModeBinding>(ActivitySel
                 setRunnerNameLauncher.launch(SetNameActivity.getStartingIntent(this))
             } else {
                 RunnerMainActivity.startActivity(this)
-                viewModel.setUserType(UserType.RUNNER)
+                userModel.setUserType(UserType.RUNNER)
             }
         }
 
@@ -38,7 +39,7 @@ class SelectModeActivity : ParentActivity<ActivitySelectModeBinding>(ActivitySel
                 setTrainerNameLauncher.launch(SetNameActivity.getStartingIntent(this))
             } else {
                 TrainerMainActivity.startActivity(this)
-                viewModel.setUserType(UserType.TRAINER)
+                userModel.setUserType(UserType.TRAINER)
             }
         }
     }
@@ -46,7 +47,7 @@ class SelectModeActivity : ParentActivity<ActivitySelectModeBinding>(ActivitySel
     private val setTrainerNameLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if(result.resultCode == Activity.RESULT_OK){
             TrainerMainActivity.startActivity(this)
-            viewModel.setUserType(UserType.TRAINER)
+            userModel.setUserType(UserType.TRAINER)
             finish()
         }
     }
@@ -54,7 +55,7 @@ class SelectModeActivity : ParentActivity<ActivitySelectModeBinding>(ActivitySel
     private val setRunnerNameLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if(result.resultCode == Activity.RESULT_OK){
             RunnerMainActivity.startActivity(this)
-            viewModel.setUserType(UserType.RUNNER)
+            userModel.setUserType(UserType.RUNNER)
             finish()
         }
     }

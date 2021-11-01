@@ -14,7 +14,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:gravity="bottom"
-        android:title="@string/global_tack_name"/>
+        android:title="@string/global_track_name"/>
 
     <Button
         android:id="@+id/confirm_button"

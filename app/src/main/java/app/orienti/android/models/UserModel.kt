@@ -1,11 +1,13 @@
-package app.orienti.android.models.models
+package app.orienti.android.models
 
 import app.orienti.android.entities.UserType
 import app.orienti.android.repositories.shared_preferences.UserSharedPreferences
-import sk.backbone.parent.models.IModel
+import javax.inject.Inject
+import javax.inject.Singleton
 
-interface IUserModel : IModel<ModelsProvider> {
-    val userSharedPreferences get() = UserSharedPreferences(context)
+@Singleton
+class UserModel @Inject constructor() {
+    @Inject lateinit var userSharedPreferences: UserSharedPreferences
 
     fun setUserName(userName: String?){
         userSharedPreferences.setName(userName)
@@ -23,7 +25,7 @@ interface IUserModel : IModel<ModelsProvider> {
         userSharedPreferences.setType(userType)
     }
 
-    fun getUserType(): UserType? {
+    fun getUserType(): UserType {
         return userSharedPreferences.getType()
     }
 }

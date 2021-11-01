@@ -8,17 +8,16 @@ import android.view.MenuItem
 import android.widget.Toast
 import app.orienti.android.R
 import app.orienti.android.databinding.ActivityCreateControlPointBinding
-import app.orienti.android.databinding.ActivityCreateTrainingBinding
-import app.orienti.android.ui.base.DefaultViewModel
-import app.orienti.android.ui.screens.trainer.create_track.CreateTrackActivity
+import app.orienti.android.models.TrainingModel
+import dagger.hilt.android.AndroidEntryPoint
 import sk.backbone.parent.ui.screens.ActivityTransitions
 import sk.backbone.parent.ui.screens.ParentActivity
 import sk.backbone.parent.utils.setSafeOnClickListener
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class CreateControlPointActivity: ParentActivity<ActivityCreateControlPointBinding>(ActivityCreateControlPointBinding::inflate) {
-    private val viewModel by lazy {
-        getViewModel<DefaultViewModel>()
-    }
+    @Inject lateinit var trainingModel: TrainingModel
 
     override fun getActivityTransitions(): ActivityTransitions = ActivityTransitions.BOTTOM_TOP
 
@@ -38,7 +37,7 @@ class CreateControlPointActivity: ParentActivity<ActivityCreateControlPointBindi
                     Toast.makeText(this, getString(R.string.validation_enter_valid_name), Toast.LENGTH_LONG).show()
                 }
                 else -> {
-                    viewModel.createControlPoint(name, code)
+                    trainingModel.createControlPoint(name, code)
                     setResult(Activity.RESULT_OK)
                     finish()
                 }

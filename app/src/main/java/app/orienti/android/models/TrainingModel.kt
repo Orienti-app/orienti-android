@@ -1,16 +1,20 @@
-package app.orienti.android.models.models
+package app.orienti.android.models
 
+import android.content.Context
 import app.orienti.android.entities.db_entities.ControlPoint
 import app.orienti.android.entities.db_entities.Track
 import app.orienti.android.entities.db_entities.Training
 import app.orienti.android.entities.db_entities.joined.RunData
 import app.orienti.android.entities.db_entities.joined.TrainingData
 import app.orienti.android.repositories.room.AppDatabase
-import sk.backbone.parent.models.IModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import java.util.*
+import javax.inject.Inject
+import javax.inject.Singleton
 
-interface ITrainingModel : IModel<ModelsProvider> {
-    val trainingDao get() = AppDatabase.getDatabase(context).trainingDao()
+@Singleton
+class TrainingModel @Inject constructor(@ApplicationContext val context: Context, private val database: AppDatabase) {
+    private val trainingDao get() = database.trainingDao()
 
     fun getTrainingData(): List<TrainingData> = trainingDao.getTrainingData()
     fun getTrainingDataForTraining(trainingId: UUID): TrainingData = trainingDao.getTrainingDataForTraining(trainingId)
