@@ -12,6 +12,8 @@ Android application for training orienteering runners developed during small hac
 6. Scanning trainer's qr code
 7. Scanning control points
 8. Run details and calculation
+9. Finish run as runner
+10. Start new run as runner
 
 ## QrCodes
 Parsing final version of Qr codes
