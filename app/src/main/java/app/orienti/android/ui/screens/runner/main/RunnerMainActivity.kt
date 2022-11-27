@@ -14,7 +14,7 @@ import app.orienti.android.ui.screens.common.set_name.SetNameActivity
 import app.orienti.android.ui.screens.runner.scan_control.ScanControlPointActivity
 import app.orienti.android.ui.screens.runner.start_run.NewRunActivity
 import dagger.hilt.android.AndroidEntryPoint
-import sk.backbone.parent.ui.components.LinearSpacingItemDecorationVertical
+import sk.backbone.parent.ui.components.recycler_decorations.LinearSpacingItemDecorationVertical
 import sk.backbone.parent.ui.screens.ParentActivity
 import sk.backbone.parent.utils.setSafeOnClickListener
 

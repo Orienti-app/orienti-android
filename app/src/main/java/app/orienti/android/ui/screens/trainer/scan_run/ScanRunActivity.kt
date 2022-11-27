@@ -5,7 +5,7 @@ import android.content.Intent
 import app.orienti.android.ui.screens.common.qr_scanning.QrAnalyzer
 import app.orienti.android.ui.screens.common.qr_scanning.QrScanningActivity
 import app.orienti.android.ui.screens.common.qr_scanning.utils.QRCodeParser
-import com.google.mlkit.vision.barcode.Barcode
+import com.google.mlkit.vision.barcode.common.Barcode
 import dagger.hilt.android.AndroidEntryPoint
 import sk.backbone.parent.utils.toJsonString
 
