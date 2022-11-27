@@ -31,6 +31,7 @@ class SelectModeActivity : ParentActivity<ActivitySelectModeBinding>(ActivitySel
             } else {
                 RunnerMainActivity.startActivity(this)
                 userModel.setUserType(UserType.RUNNER)
+                finish()
             }
         }
 
@@ -40,6 +41,7 @@ class SelectModeActivity : ParentActivity<ActivitySelectModeBinding>(ActivitySel
             } else {
                 TrainerMainActivity.startActivity(this)
                 userModel.setUserType(UserType.TRAINER)
+                finish()
             }
         }
     }
