@@ -16,17 +16,19 @@
     <string name="menu_new_run">New run</string>
     <string name="menu_change_name">Change name</string>
     <string name="menu_change_mode">Change mode</string>
+
     <string name="activity_main_trainer_label">Trainer</string>
     <string name="activity_main_trainer_trainings">Trainings</string>
     <string name="activity_main_trainer_tracks">Tracks</string>
     <string name="activity_main_trainer_control_points">Control points</string>
-    <string name="activity_main_trainer_control_settings">Settings</string>
 
     <string name="activity_main_runner_label">Runner</string>
     <string name="activity_main_runner_scanned_in_format">Scanned in %s</string>
 
     <string name="activity_set_name_label">Setting name</string>
     <string name="activity_set_name_your_name">Your new name</string>
+
+    <string name="activity_control_points_selection_label">Select control points</string>
 
     <string name="validation_enter_valid_name">Please enter valid name</string>
     <string name="validation_enter_valid_code">Please enter valid code</string>

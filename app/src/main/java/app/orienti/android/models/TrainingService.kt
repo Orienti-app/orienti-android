@@ -1,10 +1,12 @@
 package app.orienti.android.models
 
 import android.content.Context
+import androidx.lifecycle.LiveData
 import app.orienti.android.entities.db_entities.ControlPoint
 import app.orienti.android.entities.db_entities.Track
 import app.orienti.android.entities.db_entities.TrackControlPoint
 import app.orienti.android.entities.db_entities.Training
+import app.orienti.android.entities.db_entities.joined.ControlPointData
 import app.orienti.android.entities.db_entities.joined.RunData
 import app.orienti.android.entities.db_entities.joined.TrackData
 import app.orienti.android.entities.db_entities.joined.TrainingData
@@ -15,7 +17,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class TrainingModel @Inject constructor(@ApplicationContext val context: Context, private val database: AppDatabase) {
+class TrainingService @Inject constructor(@ApplicationContext val context: Context, private val database: AppDatabase) {
     private val trainingDao get() = database.trainingDao()
 
     fun getTrainingData(): List<TrainingData> = trainingDao.getTrainingData()
@@ -43,10 +45,6 @@ class TrainingModel @Inject constructor(@ApplicationContext val context: Context
         trainingDao.addRunDataToTraining(runData)
     }
 
-    fun addControlPointToTrack(track: Track, controlPoint: ControlPoint){
-        trainingDao.insert(TrackControlPoint(track.id, controlPoint.id))
-    }
-
     fun removeTraining(){
 
     }
@@ -66,5 +64,16 @@ class TrainingModel @Inject constructor(@ApplicationContext val context: Context
     fun getControlPoints() = trainingDao.getControlPoints()
     fun getTracks() = trainingDao.getTracks()
     fun getRunsDataForTraining(trainingId: UUID): List<RunData> = trainingDao.getRunsDataForTraining(trainingId)
-    fun getTrackDetail(trackId: UUID): TrackData = trainingDao.getTrackData(trackId)
+    fun getTrackDetail(trackId: UUID): LiveData<TrackData> = trainingDao.getTrackData(trackId)
+    fun getControlPointsWithDataAsLiveData(): LiveData<List<ControlPointData>> {
+        return trainingDao.getControlPointsWithDataAsLiveData()
+    }
+
+    fun deleteTrackControlPoint(trackControlPoint: TrackControlPoint) {
+        trainingDao.deleteTrackControlPoint(trackControlPoint)
+    }
+
+    fun createTrackControlPoint(trackControlPoint: TrackControlPoint) {
+        trainingDao.insert(trackControlPoint)
+    }
 }

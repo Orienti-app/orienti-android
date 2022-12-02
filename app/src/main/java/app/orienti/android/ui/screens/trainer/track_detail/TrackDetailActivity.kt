@@ -4,13 +4,12 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.recyclerview.widget.LinearLayoutManager
 import app.orienti.android.databinding.ActivityTrackDetailBinding
-import app.orienti.android.entities.db_entities.Run
-import app.orienti.android.entities.db_entities.Runner
-import app.orienti.android.entities.db_entities.Track
-import app.orienti.android.entities.db_entities.joined.RunData
 import app.orienti.android.entities.db_entities.joined.TrackData
-import app.orienti.android.models.TrainingModel
+import app.orienti.android.models.TrainingService
+import app.orienti.android.ui.screens.trainer.control_point_selection_activity.ControlPointsSelectionActivity
+import app.orienti.android.ui.screens.trainer.main.control_points.ControlPointsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import sk.backbone.parent.ui.screens.ActivityTransitions
 import sk.backbone.parent.ui.screens.ParentActivity
@@ -20,9 +19,11 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class TrackDetailActivity: ParentActivity<ActivityTrackDetailBinding>(ActivityTrackDetailBinding::inflate) {
-    @Inject lateinit var trainingModel: TrainingModel
+    @Inject lateinit var trainingService: TrainingService
+    @Inject lateinit var adapter: ControlPointsAdapter
 
     var trackData: TrackData? = null
+
 
     override fun getActivityTransitions(): ActivityTransitions = ActivityTransitions.BOTTOM_TOP
 
@@ -35,14 +36,20 @@ class TrackDetailActivity: ParentActivity<ActivityTrackDetailBinding>(ActivityTr
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        trackData = trainingModel.getTrackDetail(trackId)
+        trainingService.getTrackDetail(trackId).observe(this){
+            adapter.replaceDataSet(it.controlPoints)
+        }
+
+        viewBinding.recycler.adapter = adapter
+        viewBinding.recycler.layoutManager = LinearLayoutManager(this)
+
 
         trackData?.let {
             title = it.track.name
         }
 
-        viewBinding.add.setSafeOnClickListener {
-            // Todo: Add control point
+        viewBinding.edit.setSafeOnClickListener {
+            ControlPointsSelectionActivity.startActivity(this@TrackDetailActivity, trackId)
         }
     }
 
@@ -54,16 +61,6 @@ class TrackDetailActivity: ParentActivity<ActivityTrackDetailBinding>(ActivityTr
             }
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        trackData?.let { trackData ->
-            trainingModel.getControlPoints().forEach {
-                trainingModel.addControlPointToTrack(trackData.track, it)
-            }
-        }
     }
 
     companion object {

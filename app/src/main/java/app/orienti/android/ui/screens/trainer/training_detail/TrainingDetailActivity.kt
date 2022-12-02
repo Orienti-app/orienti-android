@@ -13,8 +13,9 @@ import app.orienti.android.entities.db_entities.Runner
 import app.orienti.android.entities.db_entities.Track
 import app.orienti.android.entities.db_entities.Training
 import app.orienti.android.entities.db_entities.joined.RunData
+import app.orienti.android.entities.db_entities.joined.TrackData
 import app.orienti.android.entities.db_entities.joined.TrainingData
-import app.orienti.android.models.TrainingModel
+import app.orienti.android.models.TrainingService
 import app.orienti.android.ui.screens.trainer.scan_run.ScanRunActivity
 import dagger.hilt.android.AndroidEntryPoint
 import sk.backbone.parent.ui.screens.ParentActivity
@@ -28,7 +29,7 @@ class TrainingDetailActivity: ParentActivity<ActivityTrainingDetailBinding>(Acti
         intent.getSerializableExtra(TRAINING_ID_DATA_EXTRAS) as UUID
     }
 
-    @Inject lateinit var trainingModel: TrainingModel
+    @Inject lateinit var trainingService: TrainingService
 
     private var adapter: RunsAdapter? = null
     private var training: Training? = null
@@ -51,7 +52,7 @@ class TrainingDetailActivity: ParentActivity<ActivityTrainingDetailBinding>(Acti
     override fun onResume() {
         super.onResume()
 
-        trainingModel.getTrainingDataForTraining(trainingId).apply {
+        trainingService.getTrainingDataForTraining(trainingId).apply {
             this@TrainingDetailActivity.training = training
             title = this.training.name
             adapter?.replaceDataSet(this.runs)
@@ -65,10 +66,10 @@ class TrainingDetailActivity: ParentActivity<ActivityTrainingDetailBinding>(Acti
             val runner = Runner(UUID.randomUUID(), "Wiiii")
 
             val runData = RunData(
-                Run(UUID.randomUUID(), track.id, trainingId, runner.id, Date(), Date()), runner, track
+                Run(UUID.randomUUID(), track.id, trainingId, runner.id, Date(), Date()), runner, TrackData(track, listOf())
             )
 
-            trainingModel.addRunData(runData)
+            trainingService.addRunData(runData)
         }
     }
 

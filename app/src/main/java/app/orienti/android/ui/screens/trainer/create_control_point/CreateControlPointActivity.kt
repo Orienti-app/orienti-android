@@ -8,7 +8,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import app.orienti.android.R
 import app.orienti.android.databinding.ActivityCreateControlPointBinding
-import app.orienti.android.models.TrainingModel
+import app.orienti.android.models.TrainingService
 import dagger.hilt.android.AndroidEntryPoint
 import sk.backbone.parent.ui.screens.ActivityTransitions
 import sk.backbone.parent.ui.screens.ParentActivity
@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class CreateControlPointActivity: ParentActivity<ActivityCreateControlPointBinding>(ActivityCreateControlPointBinding::inflate) {
-    @Inject lateinit var trainingModel: TrainingModel
+    @Inject lateinit var trainingService: TrainingService
 
     override fun getActivityTransitions(): ActivityTransitions = ActivityTransitions.BOTTOM_TOP
 
@@ -37,7 +37,7 @@ class CreateControlPointActivity: ParentActivity<ActivityCreateControlPointBindi
                     Toast.makeText(this, getString(R.string.validation_enter_valid_code), Toast.LENGTH_LONG).show()
                 }
                 else -> {
-                    trainingModel.createControlPoint(name, code)
+                    trainingService.createControlPoint(name, code)
                     setResult(Activity.RESULT_OK)
                     finish()
                 }

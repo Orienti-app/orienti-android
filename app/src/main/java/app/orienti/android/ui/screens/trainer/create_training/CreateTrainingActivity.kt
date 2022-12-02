@@ -8,7 +8,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import app.orienti.android.R
 import app.orienti.android.databinding.ActivityCreateTrainingBinding
-import app.orienti.android.models.TrainingModel
+import app.orienti.android.models.TrainingService
 import dagger.hilt.android.AndroidEntryPoint
 import sk.backbone.parent.ui.screens.ActivityTransitions
 import sk.backbone.parent.ui.screens.ParentActivity
@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class CreateTrainingActivity: ParentActivity<ActivityCreateTrainingBinding>(ActivityCreateTrainingBinding::inflate) {
-    @Inject lateinit var trainingModel: TrainingModel
+    @Inject lateinit var trainingService: TrainingService
 
     override fun getActivityTransitions(): ActivityTransitions = ActivityTransitions.BOTTOM_TOP
 
@@ -31,7 +31,7 @@ class CreateTrainingActivity: ParentActivity<ActivityCreateTrainingBinding>(Acti
             if(name?.trim()?.isNotEmpty() != true){
                 Toast.makeText(this, getString(R.string.validation_enter_valid_name), Toast.LENGTH_LONG).show()
             } else {
-                trainingModel.createTraining(name)
+                trainingService.createTraining(name)
                 setResult(Activity.RESULT_OK)
                 finish()
             }

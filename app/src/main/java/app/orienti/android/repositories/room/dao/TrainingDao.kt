@@ -1,7 +1,9 @@
 package app.orienti.android.repositories.room.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import app.orienti.android.entities.db_entities.*
+import app.orienti.android.entities.db_entities.joined.ControlPointData
 import app.orienti.android.entities.db_entities.joined.RunData
 import app.orienti.android.entities.db_entities.joined.TrackData
 import app.orienti.android.entities.db_entities.joined.TrainingData
@@ -9,11 +11,6 @@ import java.util.*
 
 @Dao
 interface TrainingDao {
-
-    //////////////////////
-    // SELECTING OBJECTS//
-    //////////////////////
-
     @Query("SELECT * FROM `Training`")
     fun getTrainings(): List<Training>
 
@@ -34,10 +31,6 @@ interface TrainingDao {
     fun getTrack(trackId: UUID): Track
 
 
-    ///////////
-    // JOINS //
-    ///////////
-
     @Transaction
     fun getTrainingDataForTraining(trainingId: UUID): TrainingData {
         val training = getTrainingById(trainingId)
@@ -54,11 +47,13 @@ interface TrainingDao {
     }
 
     @Transaction
+    @Query("SELECT * FROM `ControlPoint`")
+    fun getControlPointsWithDataAsLiveData(): LiveData<List<ControlPointData>>
+
+
+    @Transaction
     @Query("SELECT * FROM 'Track' WHERE trackId == :trackId LIMIT 1")
-    fun getTrackData(trackId: UUID): TrackData
-
-
-    // SINGLE OBJECT INSERTS
+    fun getTrackData(trackId: UUID): LiveData<TrackData>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(trainingData: Training)
@@ -78,14 +73,19 @@ interface TrainingDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(runControlPoints: RunControlPoints)
 
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(trackControlPoint: TrackControlPoint)
 
+
     @Transaction
     fun addRunDataToTraining(runData: RunData) {
-        insert(runData.track)
+        insert(runData.trackData.track)
         insert(runData.runner)
         insert(runData.run)
     }
+
+    @Delete
+    fun deleteTrackControlPoint(trackControlPoint: TrackControlPoint)
 }
 

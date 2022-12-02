@@ -4,17 +4,16 @@ import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import app.orienti.android.databinding.FragmentTracksBinding
-import app.orienti.android.models.TrainingModel
+import app.orienti.android.models.TrainingService
 import app.orienti.android.ui.screens.trainer.create_track.CreateTrackActivity
 import dagger.hilt.android.AndroidEntryPoint
 import sk.backbone.parent.ui.screens.ParentFragment
 import sk.backbone.parent.utils.setSafeOnClickListener
 import javax.inject.Inject
-import javax.inject.Singleton
 
 @AndroidEntryPoint
 class TracksFragment : ParentFragment<FragmentTracksBinding>(FragmentTracksBinding::inflate) {
-    @Inject lateinit var trainingModel: TrainingModel
+    @Inject lateinit var trainingService: TrainingService
 
     var adapter: TracksAdapter? = null
 
@@ -36,6 +35,6 @@ class TracksFragment : ParentFragment<FragmentTracksBinding>(FragmentTracksBindi
     override fun onResume() {
         super.onResume()
 
-        adapter?.replaceDataSet(trainingModel.getTracks())
+        adapter?.replaceDataSet(trainingService.getTracks())
     }
 }

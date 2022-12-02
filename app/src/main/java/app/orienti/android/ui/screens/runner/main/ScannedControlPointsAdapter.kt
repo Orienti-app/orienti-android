@@ -5,11 +5,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import app.orienti.android.R
 import app.orienti.android.databinding.UiComponentControlPointRowBinding
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.android.scopes.ActivityScoped
 import sk.backbone.parent.ui.screens.ParentRecyclerAdapter
 import sk.backbone.parent.utils.getDifferenceIn24HFormat
 import java.util.*
+import javax.inject.Inject
 
-class ControlPointsAdapter(context: Context): ParentRecyclerAdapter<Boolean, ControlPointsAdapter.ControlPointViewHolder>(context) {
+@ActivityScoped
+class ScannedControlPointsAdapter @Inject constructor(@ApplicationContext context: Context): ParentRecyclerAdapter<Boolean, ScannedControlPointsAdapter.ControlPointViewHolder>(context) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ControlPointViewHolder {
         return ControlPointViewHolder(UiComponentControlPointRowBinding.inflate(LayoutInflater.from(context), parent, false))
     }

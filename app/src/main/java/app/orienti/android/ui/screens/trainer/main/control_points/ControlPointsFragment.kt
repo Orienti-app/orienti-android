@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import app.orienti.android.databinding.FragmentControlPointsBinding
-import app.orienti.android.models.TrainingModel
+import app.orienti.android.models.TrainingService
 import app.orienti.android.ui.screens.trainer.create_control_point.CreateControlPointActivity
 import dagger.hilt.android.AndroidEntryPoint
 import sk.backbone.parent.ui.screens.ParentFragment
@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class ControlPointsFragment : ParentFragment<FragmentControlPointsBinding>(FragmentControlPointsBinding::inflate) {
-    @Inject lateinit var trainingModel: TrainingModel
+    @Inject lateinit var trainingService: TrainingService
 
     var adapter: ControlPointsAdapter? = null
 
@@ -35,6 +35,6 @@ class ControlPointsFragment : ParentFragment<FragmentControlPointsBinding>(Fragm
     override fun onResume() {
         super.onResume()
 
-        adapter?.replaceDataSet(trainingModel.getControlPoints())
+        adapter?.replaceDataSet(trainingService.getControlPoints())
     }
 }

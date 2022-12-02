@@ -7,11 +7,15 @@ import app.orienti.android.R
 import app.orienti.android.databinding.UiComponentControlPointRowBinding
 import app.orienti.android.databinding.UiComponentTextRowBinding
 import app.orienti.android.entities.db_entities.ControlPoint
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.android.scopes.ActivityScoped
 import sk.backbone.parent.ui.screens.ParentRecyclerAdapter
 import sk.backbone.parent.utils.getDifferenceIn24HFormat
 import java.util.*
+import javax.inject.Inject
 
-class ControlPointsAdapter(context: Context): ParentRecyclerAdapter<ControlPoint, ControlPointsAdapter.ControlPointViewHolder>(context) {
+@ActivityScoped
+class ControlPointsAdapter @Inject constructor(@ApplicationContext context: Context): ParentRecyclerAdapter<ControlPoint, ControlPointsAdapter.ControlPointViewHolder>(context) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ControlPointViewHolder {
         return ControlPointViewHolder(UiComponentTextRowBinding.inflate(LayoutInflater.from(context), parent, false))
     }
