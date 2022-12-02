@@ -23,12 +23,6 @@ class RunnerMainActivity : ParentActivity<ActivityMainRunnerBinding>(ActivityMai
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewBinding.recycler.layoutManager = LinearLayoutManager(this)
-        viewBinding.recycler.addItemDecoration(LinearSpacingItemDecorationVertical(resources.getDimension(R.dimen.spacing_default_15_dp).toInt()))
-        viewBinding.recycler.adapter = ControlPointsAdapter(this).apply {
-            replaceDataSet(listOf(true, true, false, true, false, true, false, true, false, true, false, true, false, true, false))
-        }
-
         viewBinding.scan.setSafeOnClickListener {
             scanControlPointLauncher.launch(ScanControlPointActivity.createIntent(it.context))
         }
