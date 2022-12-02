@@ -10,5 +10,5 @@ data class Runner(
     @PrimaryKey
     @ColumnInfo(name = "runnerId")
     val id: UUID,
-    val name: String
+    val name: String?
     )

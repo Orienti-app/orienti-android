@@ -2,24 +2,28 @@ package app.orienti.android.ui.screens.trainer.scan_run
 
 import android.content.Context
 import android.content.Intent
+import app.orienti.android.models.TrainingService
 import app.orienti.android.ui.screens.common.qr_scanning.QrAnalyzer
 import app.orienti.android.ui.screens.common.qr_scanning.QrScanningActivity
-import app.orienti.android.ui.screens.common.qr_scanning.utils.QRCodeParser
 import com.google.mlkit.vision.barcode.common.Barcode
 import dagger.hilt.android.AndroidEntryPoint
-import sk.backbone.parent.utils.toJsonString
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ScanRunActivity: QrScanningActivity() {
-    override fun onCodeScanned(analyzer: QrAnalyzer, barcode: Barcode) {
-        val qrRouteData = QRCodeParser.parseTrackDefinition(barcode.rawValue)
+    @Inject lateinit var trainingService: TrainingService
 
-        if(qrRouteData != null){
+    override fun onCodeScanned(analyzer: QrAnalyzer, barcode: Barcode) {
+        val trackData = barcode.rawValue
+
+        if(trackData != null){
             cameraProvider?.unbindAll()
             analyzer.close()
 
+            // Todo: Add new run
+
             val intent = Intent()
-            intent.putExtra(SCANNED_QR_VALUE_EXTRAS, qrRouteData.toJsonString())
+            intent.putExtra(SCANNED_QR_VALUE_EXTRAS, trackData)
             setResult(RESULT_OK, intent)
             finish()
         }

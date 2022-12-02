@@ -11,7 +11,7 @@ data class RunData(
     val run: Run,
 
     @Relation(parentColumn = "runnerId", entityColumn = "runnerId")
-    val runner: Runner,
+    val runner: Runner?,
 
     @Relation(entity = Track::class, parentColumn = "trackId", entityColumn = "trackId")
     val trackData: TrackData

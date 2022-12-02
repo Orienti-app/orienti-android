@@ -9,6 +9,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import app.orienti.android.R
 import app.orienti.android.databinding.ActivityMainRunnerBinding
+import app.orienti.android.models.TrainingService
+import app.orienti.android.ui.screens.common.qr_scanning.QrScanningActivity
 import app.orienti.android.ui.screens.common.select_mode.SelectModeActivity
 import app.orienti.android.ui.screens.common.set_name.SetNameActivity
 import app.orienti.android.ui.screens.runner.scan_control.ScanControlPointActivity
@@ -17,14 +19,21 @@ import dagger.hilt.android.AndroidEntryPoint
 import sk.backbone.parent.ui.components.recycler_decorations.LinearSpacingItemDecorationVertical
 import sk.backbone.parent.ui.screens.ParentActivity
 import sk.backbone.parent.utils.setSafeOnClickListener
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class RunnerMainActivity : ParentActivity<ActivityMainRunnerBinding>(ActivityMainRunnerBinding::inflate) {
+    @Inject lateinit var trainingService: TrainingService
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         viewBinding.scan.setSafeOnClickListener {
             scanControlPointLauncher.launch(ScanControlPointActivity.createIntent(it.context))
+        }
+
+        trainingService.getActiveRunAsLiveData().observe(this){
+
         }
     }
 

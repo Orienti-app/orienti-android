@@ -13,6 +13,7 @@ import app.orienti.android.ui.screens.trainer.main.control_points.ControlPointsA
 import dagger.hilt.android.AndroidEntryPoint
 import sk.backbone.parent.ui.screens.ActivityTransitions
 import sk.backbone.parent.ui.screens.ParentActivity
+import sk.backbone.parent.utils.setCompressedBase64JsonDataToQrCode
 import sk.backbone.parent.utils.setSafeOnClickListener
 import java.util.*
 import javax.inject.Inject
@@ -21,9 +22,6 @@ import javax.inject.Inject
 class TrackDetailActivity: ParentActivity<ActivityTrackDetailBinding>(ActivityTrackDetailBinding::inflate) {
     @Inject lateinit var trainingService: TrainingService
     @Inject lateinit var adapter: ControlPointsAdapter
-
-    var trackData: TrackData? = null
-
 
     override fun getActivityTransitions(): ActivityTransitions = ActivityTransitions.BOTTOM_TOP
 
@@ -36,17 +34,14 @@ class TrackDetailActivity: ParentActivity<ActivityTrackDetailBinding>(ActivityTr
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        trainingService.getTrackDetail(trackId).observe(this){
-            adapter.replaceDataSet(it.controlPoints)
+        trainingService.getTrackDetail(trackId).observe(this){ trackData ->
+            adapter.replaceDataSet(trackData.controlPoints)
+            title = trackData.track.name
+            viewBinding.qrCode.setCompressedBase64JsonDataToQrCode(trackData)
         }
 
         viewBinding.recycler.adapter = adapter
         viewBinding.recycler.layoutManager = LinearLayoutManager(this)
-
-
-        trackData?.let {
-            title = it.track.name
-        }
 
         viewBinding.edit.setSafeOnClickListener {
             ControlPointsSelectionActivity.startActivity(this@TrackDetailActivity, trackId)

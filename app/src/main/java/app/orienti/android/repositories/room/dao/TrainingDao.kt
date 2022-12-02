@@ -79,13 +79,20 @@ interface TrainingDao {
 
 
     @Transaction
-    fun addRunDataToTraining(runData: RunData) {
+    fun insert(runData: RunData) {
         insert(runData.trackData.track)
-        insert(runData.runner)
+        runData.runner?.let { insert(it) }
         insert(runData.run)
     }
 
     @Delete
     fun deleteTrackControlPoint(trackControlPoint: TrackControlPoint)
+
+    @Query("""UPDATE `Run` SET is_active = 0""")
+    fun deactivateAllRuns()
+
+    @Transaction
+    @Query("""SELECT * FROM `Run` LIMIT 1""")
+    fun getActiveRun(): LiveData<RunData?>
 }
 

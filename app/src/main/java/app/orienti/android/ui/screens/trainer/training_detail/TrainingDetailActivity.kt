@@ -57,20 +57,6 @@ class TrainingDetailActivity: ParentActivity<ActivityTrainingDetailBinding>(Acti
             title = this.training.name
             adapter?.replaceDataSet(this.runs)
         }
-
-
-        // Todo: Remove it
-        // Just for testing showcases
-        training?.let {
-            val track = Track(UUID.randomUUID(), "Wiiii", Date())
-            val runner = Runner(UUID.randomUUID(), "Wiiii")
-
-            val runData = RunData(
-                Run(UUID.randomUUID(), track.id, trainingId, runner.id, Date(), Date()), runner, TrackData(track, listOf())
-            )
-
-            trainingService.addRunData(runData)
-        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

@@ -17,7 +17,7 @@ class RunsAdapter(context: Context): ParentRecyclerAdapter<RunData, RunsAdapter.
 
     class ControlPointViewHolder(private val viewBinding: UiComponentTextRowBinding): ParentRecyclerViewHolder<RunData>(viewBinding.root) {
         override fun bindData(viewData: RunData) {
-            viewBinding.name.text = viewData.runner.name
+            viewBinding.name.text = viewData.runner?.name
 
             viewBinding.root.setSafeOnClickListener {
                 // TrainingDetailActivity.startActivity(it.context, viewData)

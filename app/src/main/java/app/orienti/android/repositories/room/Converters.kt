@@ -10,14 +10,14 @@ import java.util.*
 object Converters {
     @TypeConverter
     @JvmStatic
-    fun toUUID(value: String?): UUID {
-        return UUID.fromString(value)
+    fun toUUID(value: String?): UUID? {
+        return value?.let { UUID.fromString(it) }
     }
 
     @TypeConverter
     @JvmStatic
-    fun fromUUID(value: UUID): String {
-        return value.toString()
+    fun fromUUID(value: UUID?): String? {
+        return value?.toString()
     }
 
     @TypeConverter
@@ -35,7 +35,7 @@ object Converters {
     @TypeConverter
     @JvmStatic
     fun fromBigDecimal(value: BigDecimal?): String? {
-        return value?.setScale(2, RoundingMode.HALF_UP).toString()
+        return value?.setScale(2, RoundingMode.HALF_UP)?.toString()
     }
 
     @TypeConverter

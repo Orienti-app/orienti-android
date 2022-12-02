@@ -16,7 +16,7 @@ import app.orienti.android.repositories.room.dao.TrainingDao
     TrackControlPoint::class,
     RunControlPoints::class,
     ControlPoint::class
-                     ], version = 6, exportSchema = false)
+                     ], version = 7, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun trainingDao(): TrainingDao

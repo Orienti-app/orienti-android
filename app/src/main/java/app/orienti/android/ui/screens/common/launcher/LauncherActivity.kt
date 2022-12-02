@@ -3,7 +3,7 @@ package app.orienti.android.ui.screens.common.launcher
 import android.os.Bundle
 import androidx.viewbinding.ViewBinding
 import app.orienti.android.entities.UserType
-import app.orienti.android.models.UserModel
+import app.orienti.android.models.UserService
 import app.orienti.android.ui.screens.common.select_mode.SelectModeActivity
 import app.orienti.android.ui.screens.runner.main.RunnerMainActivity
 import app.orienti.android.ui.screens.trainer.main.TrainerMainActivity
@@ -13,12 +13,12 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class LauncherActivity : ParentActivity<ViewBinding>(null) {
-    @Inject lateinit var userModel: UserModel
+    @Inject lateinit var userService: UserService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        when(userModel.getUserType()){
+        when(userService.getUserType()){
             UserType.NONE -> SelectModeActivity.startActivity(this)
             UserType.RUNNER -> RunnerMainActivity.startActivity(this)
             UserType.TRAINER -> TrainerMainActivity.startActivity(this)

@@ -2,10 +2,7 @@ package app.orienti.android.models
 
 import android.content.Context
 import androidx.lifecycle.LiveData
-import app.orienti.android.entities.db_entities.ControlPoint
-import app.orienti.android.entities.db_entities.Track
-import app.orienti.android.entities.db_entities.TrackControlPoint
-import app.orienti.android.entities.db_entities.Training
+import app.orienti.android.entities.db_entities.*
 import app.orienti.android.entities.db_entities.joined.ControlPointData
 import app.orienti.android.entities.db_entities.joined.RunData
 import app.orienti.android.entities.db_entities.joined.TrackData
@@ -18,6 +15,7 @@ import javax.inject.Singleton
 
 @Singleton
 class TrainingService @Inject constructor(@ApplicationContext val context: Context, private val database: AppDatabase) {
+    @Inject lateinit var userService: UserService
     private val trainingDao get() = database.trainingDao()
 
     fun getTrainingData(): List<TrainingData> = trainingDao.getTrainingData()
@@ -41,8 +39,13 @@ class TrainingService @Inject constructor(@ApplicationContext val context: Conte
         return controlPoint
     }
 
-    fun addRunData(runData: RunData){
-        trainingDao.addRunDataToTraining(runData)
+    fun startNewRun(trackData: TrackData){
+        trainingDao.deactivateAllRuns()
+        trainingDao.insert(RunData(Run(UUID.randomUUID(), trackData.track.id, null, userService.runnerId, true, Date(), null), userService.runner, trackData))
+    }
+
+    fun getActiveRunAsLiveData(): LiveData<RunData?> {
+        return trainingDao.getActiveRun()
     }
 
     fun removeTraining(){

@@ -8,8 +8,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import app.orienti.android.R
 import app.orienti.android.databinding.ActivitySetNameBinding
-import app.orienti.android.models.UserModel
-import app.orienti.android.ui.screens.trainer.create_track.CreateTrackActivity
+import app.orienti.android.models.UserService
 import dagger.hilt.android.AndroidEntryPoint
 import sk.backbone.parent.ui.screens.ActivityTransitions
 import sk.backbone.parent.ui.screens.ParentActivity
@@ -18,7 +17,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class SetNameActivity: ParentActivity<ActivitySetNameBinding>(ActivitySetNameBinding::inflate) {
-    @Inject lateinit var userModel: UserModel
+    @Inject lateinit var userService: UserService
 
     override fun getActivityTransitions(): ActivityTransitions = ActivityTransitions.BOTTOM_TOP
 
@@ -27,7 +26,7 @@ class SetNameActivity: ParentActivity<ActivitySetNameBinding>(ActivitySetNameBin
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        userModel.getUserName()?.let {
+        userService.getUserName()?.let {
             viewBinding.name.text = it
         }
 
@@ -36,7 +35,7 @@ class SetNameActivity: ParentActivity<ActivitySetNameBinding>(ActivitySetNameBin
             if(name?.trim()?.isNotEmpty() != true){
                 Toast.makeText(this, getString(R.string.validation_enter_valid_name), Toast.LENGTH_LONG).show()
             } else {
-                userModel.setUserName(name)
+                userService.setUserName(name)
                 setResult(Activity.RESULT_OK)
                 finish()
             }
