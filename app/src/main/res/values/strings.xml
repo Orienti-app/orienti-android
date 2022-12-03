@@ -30,6 +30,8 @@
 
     <string name="activity_control_points_selection_label">Select control points</string>
 
+    <string name="activity_control_point_detail_print_job">Tlač kontrolného bodu</string>
+
     <string name="validation_enter_valid_name">Please enter valid name</string>
     <string name="validation_enter_valid_code">Please enter valid code</string>
     <string name="menu_scan_control_point">Scan control point</string>

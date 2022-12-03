@@ -7,10 +7,12 @@ import app.orienti.android.R
 import app.orienti.android.databinding.UiComponentControlPointRowBinding
 import app.orienti.android.databinding.UiComponentTextRowBinding
 import app.orienti.android.entities.db_entities.ControlPoint
+import app.orienti.android.ui.screens.trainer.run_detail.ControlPointDetailActivity
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ActivityScoped
 import sk.backbone.parent.ui.screens.ParentRecyclerAdapter
 import sk.backbone.parent.utils.getDifferenceIn24HFormat
+import sk.backbone.parent.utils.setSafeOnClickListener
 import java.util.*
 import javax.inject.Inject
 
@@ -23,6 +25,10 @@ class ControlPointsAdapter @Inject constructor(@ApplicationContext context: Cont
     class ControlPointViewHolder(private val viewBinding: UiComponentTextRowBinding): ParentRecyclerViewHolder<ControlPoint>(viewBinding.root) {
         override fun bindData(viewData: ControlPoint) {
             viewBinding.name.text = viewData.code
+
+            viewBinding.root.setSafeOnClickListener {
+                ControlPointDetailActivity.startActivity(it.context)
+            }
         }
     }
 }
