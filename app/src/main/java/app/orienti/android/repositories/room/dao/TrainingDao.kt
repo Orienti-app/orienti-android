@@ -107,5 +107,10 @@ interface TrainingDao {
     @Transaction
     @Query("""SELECT * FROM `Run` LIMIT 1""")
     fun getActiveRunData(): RunData?
+
+
+
+    @Query("""SELECT * FROM `ControlPoint` WHERE controlPointId = :controlPointId LIMIT 1""")
+    fun getControlPointLiveDataById(controlPointId: UUID): LiveData<ControlPoint?>
 }
 

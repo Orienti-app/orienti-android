@@ -85,4 +85,8 @@ class TrainingService @Inject constructor(@ApplicationContext val context: Conte
     fun createTrackControlPoint(trackControlPoint: TrackControlPoint) {
         trainingDao.insert(trackControlPoint)
     }
+
+    fun getControlPointById(controlPointId: UUID): LiveData<ControlPoint?> {
+        return trainingDao.getControlPointLiveDataById(controlPointId)
+    }
 }

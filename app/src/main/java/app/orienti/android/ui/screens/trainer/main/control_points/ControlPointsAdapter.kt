@@ -24,10 +24,10 @@ class ControlPointsAdapter @Inject constructor(@ApplicationContext context: Cont
 
     class ControlPointViewHolder(private val viewBinding: UiComponentTextRowBinding): ParentRecyclerViewHolder<ControlPoint>(viewBinding.root) {
         override fun bindData(viewData: ControlPoint) {
-            viewBinding.name.text = viewData.code
+            viewBinding.name.text = viewData.name
 
             viewBinding.root.setSafeOnClickListener {
-                ControlPointDetailActivity.startActivity(it.context)
+                ControlPointDetailActivity.startActivity(it.context, viewData.id)
             }
         }
     }
