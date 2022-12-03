@@ -9,7 +9,7 @@ import java.util.*
 data class Run(
     @PrimaryKey
     @ColumnInfo(name = "runId")
-    val id: UUID,
+    val runId: UUID,
     val trackId: UUID,
     val trainingId: UUID?,
     val runnerId: UUID,

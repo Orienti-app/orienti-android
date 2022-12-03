@@ -45,7 +45,13 @@ class TrainingService @Inject constructor(@ApplicationContext val context: Conte
     }
 
     fun getActiveRunAsLiveData(): LiveData<RunData?> {
-        return trainingDao.getActiveRun()
+        return trainingDao.getActiveRunAsLiveData()
+    }
+
+    fun onControlPointScanned(controlPoint: ControlPoint){
+        trainingDao.getActiveRunData()?.let { runData ->
+            trainingDao.insert(ScannedRunControlPoint(runData.run.runId, controlPoint.id))
+        }
     }
 
     fun removeTraining(){

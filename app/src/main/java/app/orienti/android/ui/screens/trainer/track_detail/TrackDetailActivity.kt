@@ -4,9 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View.GONE
 import androidx.recyclerview.widget.LinearLayoutManager
 import app.orienti.android.databinding.ActivityTrackDetailBinding
-import app.orienti.android.entities.db_entities.joined.TrackData
 import app.orienti.android.models.TrainingService
 import app.orienti.android.ui.screens.trainer.control_point_selection_activity.ControlPointsSelectionActivity
 import app.orienti.android.ui.screens.trainer.main.control_points.ControlPointsAdapter
@@ -15,7 +15,6 @@ import sk.backbone.parent.ui.screens.ActivityTransitions
 import sk.backbone.parent.ui.screens.ParentActivity
 import sk.backbone.parent.utils.setCompressedBase64JsonDataToQrCode
 import sk.backbone.parent.utils.setSafeOnClickListener
-import sk.backbone.parent.utils.toJsonString
 import java.util.*
 import javax.inject.Inject
 
@@ -25,6 +24,8 @@ class TrackDetailActivity: ParentActivity<ActivityTrackDetailBinding>(ActivityTr
     @Inject lateinit var adapter: ControlPointsAdapter
 
     override fun getActivityTransitions(): ActivityTransitions = ActivityTransitions.BOTTOM_TOP
+
+    var alreadyLoaded = false
 
     private val trackId: UUID by lazy {
         intent.getSerializableExtra(TRACK_ID_EXTRAS) as UUID
@@ -36,9 +37,15 @@ class TrackDetailActivity: ParentActivity<ActivityTrackDetailBinding>(ActivityTr
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         trainingService.getTrackDetail(trackId).observe(this){ trackData ->
-            adapter.replaceDataSet(trackData.controlPoints)
+            adapter.replaceDataSet(trackData.controlPointsSortedByDate)
             title = trackData.track.name
             viewBinding.qrCode.setCompressedBase64JsonDataToQrCode(trackData)
+
+            if(!alreadyLoaded && trackData.controlPoints.any()){
+                alreadyLoaded = true
+
+                viewBinding.edit.visibility = GONE
+            }
         }
 
         viewBinding.recycler.adapter = adapter

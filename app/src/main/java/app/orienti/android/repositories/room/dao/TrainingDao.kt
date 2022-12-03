@@ -74,7 +74,7 @@ interface TrainingDao {
     fun insert(controlPoint: ControlPoint)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(runControlPoints: RunControlPoints)
+    fun insert(scannedRunControlPoint: ScannedRunControlPoint)
 
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -87,9 +87,8 @@ interface TrainingDao {
         runData.runner?.let { insert(it) }
         insert(runData.run)
 
-        runData.trackData.controlPoints.forEach {
+        runData.trackData.trackControlPoints.forEach {
             insert(it)
-            insert(TrackControlPoint(runData.trackData.track.id, it.id))
         }
 
         insert(runData.trackData.controlPoints)
@@ -103,6 +102,10 @@ interface TrainingDao {
 
     @Transaction
     @Query("""SELECT * FROM `Run` LIMIT 1""")
-    fun getActiveRun(): LiveData<RunData?>
+    fun getActiveRunAsLiveData(): LiveData<RunData?>
+
+    @Transaction
+    @Query("""SELECT * FROM `Run` LIMIT 1""")
+    fun getActiveRunData(): RunData?
 }
 

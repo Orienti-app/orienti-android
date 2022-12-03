@@ -17,4 +17,12 @@ data class TrackData(
         associateBy = Junction(TrackControlPoint::class)
     )
     val controlPoints: List<ControlPoint>,
-)
+
+    @Relation(
+        parentColumn = "trackId",
+        entityColumn = "trackId",
+    )
+    val trackControlPoints: List<TrackControlPoint>,
+) {
+    val controlPointsSortedByDate get() = trackControlPoints.sortedBy { it.added_at }.map { trackControlPoint -> controlPoints.first { controlPoint -> controlPoint.id == trackControlPoint.controlPointId } }
+}

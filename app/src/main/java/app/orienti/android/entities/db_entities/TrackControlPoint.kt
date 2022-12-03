@@ -7,4 +7,5 @@ import java.util.*
 data class TrackControlPoint(
     val trackId: UUID,
     val controlPointId: UUID,
+    val added_at: Date = Date()
 )
