@@ -1,7 +1,9 @@
 # orienti-android
+
 Android application for training orienteering runners developed during small hackathon.
 
 # Work in progress / missing features:
+
 ## UI
 
 1. Rework QR codes to use more complex protocol
@@ -16,11 +18,14 @@ Android application for training orienteering runners developed during small hac
 10. Start new run as runner
 
 ## QrCodes
+
 Parsing final version of Qr codes
 Error handling
 
 ## Database
+
 Local database for runner (caching runner data about run...)
 
 ## Synchronization
+
 Whole synchronization is missing
