@@ -2,7 +2,8 @@ package app.orienti.android.ui.screens.runner.start_run
 
 import android.content.Context
 import android.content.Intent
-import app.orienti.android.entities.db_entities.joined.TrackData
+import app.orienti.android.entities.qr.QrContainer
+import app.orienti.android.entities.qr.QrType
 import app.orienti.android.models.TrainingService
 import app.orienti.android.ui.screens.common.qr_scanning.QrAnalyzer
 import app.orienti.android.ui.screens.common.qr_scanning.QrScanningActivity
@@ -18,16 +19,16 @@ class NewRunActivity: QrScanningActivity() {
     @Inject lateinit var trainingService: TrainingService
 
     override fun onCodeScanned(analyzer: QrAnalyzer, barcode: Barcode) {
-        val trackData = barcode.rawValue?.decompressFromBase64()?.jsonToObject<TrackData>()
+        val qrData = barcode.rawValue?.decompressFromBase64()?.jsonToObject<QrContainer>()
 
-        if(trackData != null){
+        if (qrData?.type == QrType.TRACK && qrData.track != null) {
             cameraProvider?.unbindAll()
             analyzer.close()
 
-            trainingService.startNewRun(trackData)
+            trainingService.startNewRun(qrData.track)
 
             val intent = Intent()
-            intent.putExtra(SCANNED_QR_VALUE_EXTRAS, trackData.toJsonString())
+            intent.putExtra(SCANNED_QR_VALUE_EXTRAS, qrData.track.toJsonString())
             setResult(RESULT_OK, intent)
             finish()
         }
