@@ -8,6 +8,7 @@ import app.orienti.android.databinding.UiComponentControlPointRowBinding
 import app.orienti.android.databinding.UiComponentTextRowBinding
 import app.orienti.android.entities.db_entities.ControlPoint
 import app.orienti.android.ui.screens.trainer.run_detail.ControlPointDetailActivity
+import dagger.hilt.android.qualifiers.ActivityContext
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ActivityScoped
 import sk.backbone.parent.ui.screens.ParentRecyclerAdapter
@@ -17,7 +18,7 @@ import java.util.*
 import javax.inject.Inject
 
 @ActivityScoped
-class ControlPointsAdapter @Inject constructor(@ApplicationContext context: Context): ParentRecyclerAdapter<ControlPoint, ControlPointsAdapter.ControlPointViewHolder>(context) {
+class ControlPointsAdapter @Inject constructor(@ActivityContext context: Context): ParentRecyclerAdapter<ControlPoint, ControlPointsAdapter.ControlPointViewHolder>(context) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ControlPointViewHolder {
         return ControlPointViewHolder(UiComponentTextRowBinding.inflate(LayoutInflater.from(context), parent, false))
     }
