@@ -33,7 +33,7 @@ class RunnerMainActivity : ParentActivity<ActivityMainRunnerBinding>(ActivityMai
         val runDetailFragment: RunDetailFragment = supportFragmentManager.findFragmentById(R.id.run_detail_fragment) as RunDetailFragment
 
         trainingService.getActiveRunAsLiveData().observe(this){
-            runDetailFragment.setRunId(it)
+            runDetailFragment.setRun(it, true)
         }
     }
 
