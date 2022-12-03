@@ -1,6 +1,7 @@
 package app.orienti.android.entities.db_entities
 
 import androidx.room.Entity
+import androidx.room.Ignore
 import java.util.*
 
 @Entity(primaryKeys = ["trackId", "controlPointId"])

@@ -21,7 +21,7 @@ class ScannedControlPointsAdapter @Inject constructor(@ApplicationContext contex
 
     class ControlPointViewHolder(private val viewBinding: UiComponentControlPointRowBinding): ParentRecyclerViewHolder<ControlPoint>(viewBinding.root) {
         override fun bindData(viewData: ControlPoint) {
-            viewBinding.scanned.isChecked = true
+            viewBinding.scanned.isChecked = viewData.checked
             val timeInPast = Date(Date().time - 49234728934)
             val now = Date()
 

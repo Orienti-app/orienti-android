@@ -2,10 +2,7 @@ package app.orienti.android.entities.db_entities.joined
 
 import androidx.room.Embedded
 import androidx.room.Relation
-import app.orienti.android.entities.db_entities.Run
-import app.orienti.android.entities.db_entities.ScannedRunControlPoint
-import app.orienti.android.entities.db_entities.Runner
-import app.orienti.android.entities.db_entities.Track
+import app.orienti.android.entities.db_entities.*
 
 data class RunData(
     @Embedded
@@ -19,4 +16,13 @@ data class RunData(
 
     @Relation(entity = ScannedRunControlPoint::class, parentColumn = "runId", entityColumn = "runId")
     val scannedRunControlPoints: List<ScannedRunControlPoint> = listOf()
-    )
+    ){
+    val runControlPoints : List<ControlPoint> get() = trackData.controlPointsSortedByDate.map { trackControlPoint ->
+        trackControlPoint.let { controlPoint ->
+            controlPoint.checked = scannedRunControlPoints.any { runControlPoint ->
+                runControlPoint.controlPointId == controlPoint.id
+            }
+            return@let controlPoint
+        }
+    }
+}

@@ -31,7 +31,7 @@ abstract class RunDetailFragment : ParentFragment<FragmentRunDetailBinding>(Frag
         if(runData != null){
             viewBinding.recycler.adapter = view?.let {
                 ScannedControlPointsAdapter(it.context).apply {
-                    replaceDataSet(runData.trackData.controlPoints)
+                    replaceDataSet(runData.runControlPoints)
                     if(showQrCode){
                         viewBinding.qrCode.setCompressedBase64JsonDataToQrCode(QrContainer(QrType.RUN, run = runData))
                     }
