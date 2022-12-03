@@ -5,7 +5,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View.GONE
+import android.view.View.VISIBLE
+import androidx.print.PrintHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import app.orienti.android.R
 import app.orienti.android.databinding.ActivityTrackDetailBinding
 import app.orienti.android.entities.qr.QrContainer
 import app.orienti.android.entities.qr.QrType
@@ -28,8 +31,6 @@ class TrackDetailActivity: ParentActivity<ActivityTrackDetailBinding>(ActivityTr
 
     override fun getActivityTransitions(): ActivityTransitions = ActivityTransitions.BOTTOM_TOP
 
-    var alreadyLoaded = false
-
     private val trackId: UUID by lazy {
         intent.getSerializableExtra(TRACK_ID_EXTRAS) as UUID
     }
@@ -42,13 +43,20 @@ class TrackDetailActivity: ParentActivity<ActivityTrackDetailBinding>(ActivityTr
         trainingService.getTrackDetail(trackId).observe(this){ trackData ->
             adapter.replaceDataSet(trackData.controlPointsSortedByDate)
             title = trackData.track.name
+            viewBinding.nameText.text = trackData.track.name
             viewBinding.qrCode.setGzipBase64JsonDataToQrCode(QrContainer(QrType.TRACK, trackData))
-            viewBinding.qrCode.setCompressedBase64JsonDataToQrCode(trackData)
 
-            if(!alreadyLoaded && trackData.controlPoints.any()){
-                alreadyLoaded = true
-
+            if(trackData.controlPoints.any()){
                 viewBinding.edit.visibility = GONE
+                viewBinding.print.visibility = VISIBLE
+            }
+
+            viewBinding.print.setSafeOnClickListener {
+                viewBinding.printable.getBitmap{ bitmap ->
+                    val printHelper = PrintHelper(this@TrackDetailActivity)
+                    printHelper.scaleMode = PrintHelper.SCALE_MODE_FIT
+                    printHelper.printBitmap(getString(R.string.activity_control_point_detail_print_job), bitmap)
+                }
             }
         }
 

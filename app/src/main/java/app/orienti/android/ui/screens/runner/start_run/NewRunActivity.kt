@@ -12,6 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import sk.backbone.parent.utils.decompressFromBase64
 import sk.backbone.parent.utils.jsonToObject
 import sk.backbone.parent.utils.toJsonString
+import sk.backbone.parent.utils.ungzipBase64
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -19,7 +20,7 @@ class NewRunActivity: QrScanningActivity() {
     @Inject lateinit var trainingService: TrainingService
 
     override fun onCodeScanned(analyzer: QrAnalyzer, barcode: Barcode) {
-        val qrData = barcode.rawValue?.decompressFromBase64()?.jsonToObject<QrContainer>()
+        val qrData = barcode.rawValue?.ungzipBase64()?.jsonToObject<QrContainer>()
 
         if (qrData?.type == QrType.TRACK && qrData.track != null) {
             cameraProvider?.unbindAll()
