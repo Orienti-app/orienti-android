@@ -6,17 +6,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.recyclerview.widget.LinearLayoutManager
 import app.orienti.android.R
 import app.orienti.android.databinding.ActivityMainRunnerBinding
 import app.orienti.android.models.TrainingService
-import app.orienti.android.ui.screens.common.qr_scanning.QrScanningActivity
+import app.orienti.android.ui.screens.common.run_detail.RunDetailFragment
 import app.orienti.android.ui.screens.common.select_mode.SelectModeActivity
 import app.orienti.android.ui.screens.common.set_name.SetNameActivity
 import app.orienti.android.ui.screens.runner.scan_control.ScanControlPointActivity
 import app.orienti.android.ui.screens.runner.start_run.NewRunActivity
 import dagger.hilt.android.AndroidEntryPoint
-import sk.backbone.parent.ui.components.recycler_decorations.LinearSpacingItemDecorationVertical
 import sk.backbone.parent.ui.screens.ParentActivity
 import sk.backbone.parent.utils.setSafeOnClickListener
 import javax.inject.Inject
@@ -32,8 +30,10 @@ class RunnerMainActivity : ParentActivity<ActivityMainRunnerBinding>(ActivityMai
             scanControlPointLauncher.launch(ScanControlPointActivity.createIntent(it.context))
         }
 
-        trainingService.getActiveRunAsLiveData().observe(this){
+        val runDetailFragment: RunDetailFragment = supportFragmentManager.findFragmentById(R.id.run_detail_fragment) as RunDetailFragment
 
+        trainingService.getActiveRunAsLiveData().observe(this){
+            runDetailFragment.setRunId(it)
         }
     }
 

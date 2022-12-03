@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import app.orienti.android.R
 import app.orienti.android.databinding.FragmentRunDetailBinding
 import app.orienti.android.entities.db_entities.Track
+import app.orienti.android.entities.db_entities.joined.RunData
 import app.orienti.android.ui.screens.runner.main.ScannedControlPointsAdapter
 import sk.backbone.parent.ui.components.recycler_decorations.LinearSpacingItemDecorationVertical
 import sk.backbone.parent.ui.screens.ParentFragment
@@ -22,16 +23,18 @@ abstract class RunDetailFragment : ParentFragment<FragmentRunDetailBinding>(Frag
             LinearSpacingItemDecorationVertical(resources.getDimension(
                 R.dimen.spacing_default_15_dp).toInt())
         )
-        viewBinding.recycler.adapter = ScannedControlPointsAdapter(view.context).apply {
-            replaceDataSet(listOf(true, true, false, true, false, true, false, true, false, true, false, true, false, true, false))
-        }
 
         viewBinding.qrCode.setCompressedBase64JsonDataToQrCode(Track(UUID.randomUUID(), "name", Date()))
     }
 
-    fun setRunId(runId: UUID){
-        // Todo: remove old run observer
-        // Todo: set run observer
-        // Todo: in observer update qr code
+    fun setRunId(runData: RunData?){
+        if(runData != null){
+            viewBinding.recycler.adapter = view?.let {
+                ScannedControlPointsAdapter(it.context).apply {
+                    replaceDataSet(runData.trackData.controlPoints)
+                }
+            }
+
+        }
     }
 }

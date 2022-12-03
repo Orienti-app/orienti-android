@@ -68,6 +68,9 @@ interface TrainingDao {
     fun insert(track: Track)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(track: List<ControlPoint>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(controlPoint: ControlPoint)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -77,12 +80,19 @@ interface TrainingDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(trackControlPoint: TrackControlPoint)
 
-
+    @Insert
     @Transaction
     fun insert(runData: RunData) {
         insert(runData.trackData.track)
         runData.runner?.let { insert(it) }
         insert(runData.run)
+
+        runData.trackData.controlPoints.forEach {
+            insert(it)
+            insert(TrackControlPoint(runData.trackData.track.id, it.id))
+        }
+
+        insert(runData.trackData.controlPoints)
     }
 
     @Delete

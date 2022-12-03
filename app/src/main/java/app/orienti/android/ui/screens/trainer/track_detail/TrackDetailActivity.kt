@@ -15,6 +15,7 @@ import sk.backbone.parent.ui.screens.ActivityTransitions
 import sk.backbone.parent.ui.screens.ParentActivity
 import sk.backbone.parent.utils.setCompressedBase64JsonDataToQrCode
 import sk.backbone.parent.utils.setSafeOnClickListener
+import sk.backbone.parent.utils.toJsonString
 import java.util.*
 import javax.inject.Inject
 
