@@ -6,8 +6,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.lifecycle.LiveData
 import app.orienti.android.R
 import app.orienti.android.databinding.ActivityMainRunnerBinding
+import app.orienti.android.entities.db_entities.joined.RunData
 import app.orienti.android.models.TrainingService
 import app.orienti.android.ui.screens.common.run_detail.RunDetailFragment
 import app.orienti.android.ui.screens.common.select_mode.SelectModeActivity
@@ -23,6 +25,10 @@ import javax.inject.Inject
 class RunnerMainActivity : ParentActivity<ActivityMainRunnerBinding>(ActivityMainRunnerBinding::inflate) {
     @Inject lateinit var trainingService: TrainingService
 
+    var runDataLiveData: LiveData<RunData?>? = null
+
+    private val runDetailFragment: RunDetailFragment get() = supportFragmentManager.findFragmentById(R.id.run_detail_fragment) as RunDetailFragment
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -30,11 +36,7 @@ class RunnerMainActivity : ParentActivity<ActivityMainRunnerBinding>(ActivityMai
             scanControlPointLauncher.launch(ScanControlPointActivity.createIntent(it.context))
         }
 
-        val runDetailFragment: RunDetailFragment = supportFragmentManager.findFragmentById(R.id.run_detail_fragment) as RunDetailFragment
-
-        trainingService.getActiveRunAsLiveData().observe(this){
-            runDetailFragment.setRun(it, true)
-        }
+        setupRunObserver()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -61,6 +63,14 @@ class RunnerMainActivity : ParentActivity<ActivityMainRunnerBinding>(ActivityMai
         }
     }
 
+    private fun setupRunObserver(){
+        runDataLiveData?.removeObservers(this)
+        runDataLiveData = trainingService.getActiveRunAsLiveData()
+        runDataLiveData?.observe(this){
+            runDetailFragment.setRun(it, true)
+        }
+    }
+
     private val scanControlPointLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if(result.resultCode == Activity.RESULT_OK){
             return@registerForActivityResult
@@ -69,6 +79,7 @@ class RunnerMainActivity : ParentActivity<ActivityMainRunnerBinding>(ActivityMai
 
     private val newRunLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if(result.resultCode == Activity.RESULT_OK){
+            setupRunObserver()
             return@registerForActivityResult
         }
     }

@@ -105,22 +105,17 @@ interface TrainingDao {
 
     @Transaction
     @Query("""SELECT * FROM `Run` LIMIT 1""")
-    fun getActiveRunAsLiveData(): LiveData<RunData?>
-
-    @Transaction
-    @Query("""SELECT * FROM `Run` LIMIT 1""")
     fun getActiveRunData(): RunData?
-
-
 
     @Query("""SELECT * FROM `ControlPoint` WHERE controlPointId = :controlPointId LIMIT 1""")
     fun getControlPointLiveDataById(controlPointId: UUID): LiveData<ControlPoint?>
-    fun insert(runData: QrContainer) {
-
-    }
 
     @Transaction
     @Query("""SELECT * FROM `Run` WHERE runId = :runId LIMIT 1""")
-    fun getRunDataByIdAsLiveData(runId: UUID) : LiveData<RunData?>
+    fun getRunDataByIdAsLiveData(runId: UUID?) : LiveData<RunData?>
+
+    @Transaction
+    @Query("""SELECT * FROM `Run` WHERE runId = :runId LIMIT 1""")
+    fun getRunDataByIdData(runId: UUID?) : RunData?
 }
 

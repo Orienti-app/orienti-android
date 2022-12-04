@@ -1,8 +1,8 @@
 package app.orienti.android.entities.qr
 
 enum class QrType {
-    RUN,
-    CONTROL_POINT,
     TRACK,
-    STOP
+    CONTROL_POINT,
+    FINISH_RUN,
+    RUN
 }

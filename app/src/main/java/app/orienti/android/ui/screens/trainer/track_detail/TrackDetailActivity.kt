@@ -10,6 +10,7 @@ import androidx.print.PrintHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import app.orienti.android.R
 import app.orienti.android.databinding.ActivityTrackDetailBinding
+import app.orienti.android.entities.db_entities.ControlPoint
 import app.orienti.android.entities.qr.QrContainer
 import app.orienti.android.entities.qr.QrType
 import app.orienti.android.models.TrainingService
@@ -41,7 +42,9 @@ class TrackDetailActivity: ParentActivity<ActivityTrackDetailBinding>(ActivityTr
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         trainingService.getTrackDetail(trackId).observe(this){ trackData ->
-            adapter.replaceDataSet(trackData.controlPointsSortedByDate)
+            adapter.replaceDataSet(trackData.controlPointsSortedByDate.toMutableList().apply {
+                add(ControlPoint(UUID(0, 0), getString(R.string.control_point_finish_code), getString(R.string.control_point_finish_name), Date()))
+            })
             title = trackData.track.name
             viewBinding.nameText.text = trackData.track.name
             viewBinding.qrCode.setGzipBase64JsonDataToQrCode(QrContainer(QrType.TRACK, trackData))

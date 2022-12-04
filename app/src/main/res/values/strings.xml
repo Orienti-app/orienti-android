@@ -36,4 +36,6 @@
     <string name="validation_enter_valid_code">Please enter valid code</string>
     <string name="menu_scan_control_point">Scan control point</string>
     <string name="menu_scan_run">Scan run</string>
+    <string name="control_point_finish_code">FINISH</string>
+    <string name="control_point_finish_name">FINISH</string>
 </resources>

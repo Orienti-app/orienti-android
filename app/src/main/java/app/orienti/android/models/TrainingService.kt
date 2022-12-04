@@ -8,6 +8,7 @@ import app.orienti.android.entities.db_entities.joined.RunData
 import app.orienti.android.entities.db_entities.joined.TrackData
 import app.orienti.android.entities.db_entities.joined.TrainingData
 import app.orienti.android.repositories.room.AppDatabase
+import app.orienti.android.repositories.shared_preferences.TrainingSharedPreferences
 import dagger.hilt.android.qualifiers.ApplicationContext
 import java.util.*
 import javax.inject.Inject
@@ -16,6 +17,7 @@ import javax.inject.Singleton
 @Singleton
 class TrainingService @Inject constructor(@ApplicationContext val context: Context, private val database: AppDatabase) {
     @Inject lateinit var userService: UserService
+    @Inject lateinit var trainingSharedPreferences: TrainingSharedPreferences
     private val trainingDao get() = database.trainingDao()
 
     fun getTrainingData(): List<TrainingData> = trainingDao.getTrainingData()
@@ -42,39 +44,30 @@ class TrainingService @Inject constructor(@ApplicationContext val context: Conte
     fun startNewRun(trackData: TrackData){
         trainingDao.deactivateAllRuns()
         val run: RunData = trainingDao.insert(RunData(Run(UUID.randomUUID(), trackData.track.id, null, userService.currentUserId, true, Date(), null), userService.currentUser, trackData))
-
+        trainingSharedPreferences.setCurrentlyActiveRunId(run.run.runId)
     }
 
     fun getActiveRunAsLiveData(): LiveData<RunData?> {
-        return trainingDao.getActiveRunAsLiveData()
+        val currentRunId = trainingSharedPreferences.getCurrentlyActiveRunId()
+        return trainingDao.getRunDataByIdAsLiveData(currentRunId)
     }
 
     fun onControlPointScanned(controlPoint: ControlPoint){
         trainingDao.getActiveRunData()?.let { runData ->
             trainingDao.insert(ScannedRunControlPoint(runData.run.runId, controlPoint.id))
+            if(runData.run.started_at == null){
+                runData.run.started_at = Date()
+                trainingDao.insert(runData.run)
+            }
         }
     }
 
-    fun removeTraining(){
-
-    }
-
-    fun removeTrack(){
-
-    }
-
-    fun removeRunFromTraining(){
-
-    }
-
-    fun removeControlPoint(){
-
-    }
-
     fun getControlPoints() = trainingDao.getControlPoints()
+
     fun getTracks() = trainingDao.getTracks()
-    fun getRunsDataForTraining(trainingId: UUID): List<RunData> = trainingDao.getRunsDataForTraining(trainingId)
+
     fun getTrackDetail(trackId: UUID): LiveData<TrackData> = trainingDao.getTrackData(trackId)
+
     fun getControlPointsWithDataAsLiveData(): LiveData<List<ControlPointData>> {
         return trainingDao.getControlPointsWithDataAsLiveData()
     }
@@ -98,5 +91,13 @@ class TrainingService @Inject constructor(@ApplicationContext val context: Conte
 
     fun getRunByIdAsLiveData(runId: UUID): LiveData<RunData?> {
         return trainingDao.getRunDataByIdAsLiveData(runId)
+    }
+
+    fun onStopScanned() {
+        val currentRun = trainingDao.getRunDataByIdData(trainingSharedPreferences.getCurrentlyActiveRunId())
+        currentRun?.run?.finished_at = Date()
+        currentRun?.let {
+            trainingDao.insert(currentRun)
+        }
     }
 }

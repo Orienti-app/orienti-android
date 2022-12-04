@@ -20,7 +20,7 @@ class ScanControlPointActivity: QrScanningActivity() {
     override fun onCodeScanned(analyzer: QrAnalyzer, barcode: Barcode) {
         val qrData = barcode.rawValue?.ungzipBase64()?.jsonToObject<QrContainer>()
 
-        if(qrData != null && qrData.type == QrType.CONTROL_POINT && qrData.controlPoint != null){
+        if(qrData?.type == QrType.CONTROL_POINT && qrData.controlPoint != null){
             cameraProvider?.unbindAll()
             analyzer.close()
 
@@ -29,6 +29,8 @@ class ScanControlPointActivity: QrScanningActivity() {
             val intent = Intent()
             setResult(RESULT_OK, intent)
             finish()
+        } else if(qrData?.type == QrType.FINISH_RUN) {
+            trainingService.onStopScanned()
         }
     }
 

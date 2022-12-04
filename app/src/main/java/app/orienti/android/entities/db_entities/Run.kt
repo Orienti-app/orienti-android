@@ -14,6 +14,6 @@ data class Run(
     var trainingId: UUID?,
     val userId: UUID,
     val is_active: Boolean,
-    val started_at: Date,
-    val finished_at: Date?,
+    var started_at: Date?,
+    var finished_at: Date?,
     )
