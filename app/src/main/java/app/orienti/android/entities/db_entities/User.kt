@@ -10,5 +10,5 @@ data class User(
     @PrimaryKey
     @ColumnInfo(name = "userId")
     val userId: UUID = UUID.randomUUID(),
-    var name: String? = ""
+    var name: String? = null
     )

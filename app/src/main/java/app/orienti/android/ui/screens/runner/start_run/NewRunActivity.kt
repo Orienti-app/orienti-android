@@ -29,7 +29,6 @@ class NewRunActivity: QrScanningActivity() {
             trainingService.startNewRun(qrData.track)
 
             val intent = Intent()
-            intent.putExtra(SCANNED_QR_VALUE_EXTRAS, qrData.track.toJsonString())
             setResult(RESULT_OK, intent)
             finish()
         }
