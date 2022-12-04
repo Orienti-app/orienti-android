@@ -11,7 +11,10 @@ import app.orienti.android.entities.qr.QrType
 import app.orienti.android.ui.screens.runner.main.ScannedControlPointsAdapter
 import sk.backbone.parent.ui.components.recycler_decorations.LinearSpacingItemDecorationVertical
 import sk.backbone.parent.ui.screens.ParentFragment
+import sk.backbone.parent.utils.formatIsoDateOnlyToLocalDate
+import sk.backbone.parent.utils.getDifferenceIn24HFormat
 import sk.backbone.parent.utils.setGzipBase64JsonDataToQrCode
+import java.util.*
 
 
 abstract class RunDetailFragment : ParentFragment<FragmentRunDetailBinding>(FragmentRunDetailBinding::inflate) {
@@ -25,13 +28,27 @@ abstract class RunDetailFragment : ParentFragment<FragmentRunDetailBinding>(Frag
         )
     }
 
-    fun setRun(runData: RunData?, showQrCode: Boolean){
+    fun setupWithRunData(runData: RunData?, showQrCode: Boolean){
         if(runData != null){
             viewBinding.recycler.adapter = view?.let {
                 ScannedControlPointsAdapter(it.context).apply {
+                    val started = runData.run.started_at
+                    val finished = runData.run.finished_at
+
                     replaceDataSet(runData.runControlPoints)
                     if(showQrCode){
                         viewBinding.qrCode.setGzipBase64JsonDataToQrCode(QrContainer(QrType.RUN, run = runData))
+                    }
+
+                    if(started == null){
+                        viewBinding.startedAtValue.text = "-"
+                    } else {
+                        viewBinding.startedAtValue.text = runData.run.started_at.toString()
+                        if(finished == null){
+                            viewBinding.elapsedValue.text = getDifferenceIn24HFormat(Date(), started)
+                        } else {
+                            viewBinding.elapsedValue.text = getDifferenceIn24HFormat(finished, started)
+                        }
                     }
                 }
             }

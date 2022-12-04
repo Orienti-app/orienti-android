@@ -42,8 +42,7 @@ class TrainingService @Inject constructor(@ApplicationContext val context: Conte
     }
 
     fun startNewRun(trackData: TrackData){
-        trainingDao.deactivateAllRuns()
-        val run: RunData = trainingDao.insert(RunData(Run(UUID.randomUUID(), trackData.track.id, null, userService.currentUserId, true, Date(), null), userService.currentUser, trackData))
+        val run: RunData = trainingDao.insert(RunData(Run(UUID.randomUUID(), trackData.track.id, null, userService.currentUserId, null, null), userService.currentUser, trackData))
         trainingSharedPreferences.setCurrentlyActiveRunId(run.run.runId)
     }
 
@@ -53,7 +52,7 @@ class TrainingService @Inject constructor(@ApplicationContext val context: Conte
     }
 
     fun onControlPointScanned(controlPoint: ControlPoint){
-        trainingDao.getActiveRunData()?.let { runData ->
+        trainingDao.getRunDataByIdData(trainingSharedPreferences.getCurrentlyActiveRunId())?.let { runData ->
             trainingDao.insert(ScannedRunControlPoint(runData.run.runId, controlPoint.id))
             if(runData.run.started_at == null){
                 runData.run.started_at = Date()

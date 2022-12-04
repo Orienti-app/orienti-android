@@ -67,7 +67,7 @@ class RunnerMainActivity : ParentActivity<ActivityMainRunnerBinding>(ActivityMai
         runDataLiveData?.removeObservers(this)
         runDataLiveData = trainingService.getActiveRunAsLiveData()
         runDataLiveData?.observe(this){
-            runDetailFragment.setRun(it, true)
+            runDetailFragment.setupWithRunData(it, true)
         }
     }
 

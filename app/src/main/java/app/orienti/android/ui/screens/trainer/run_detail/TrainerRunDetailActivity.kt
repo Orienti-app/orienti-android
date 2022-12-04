@@ -7,7 +7,6 @@ import app.orienti.android.R
 import app.orienti.android.databinding.ActivityTrainerRunDetailBinding
 import app.orienti.android.models.TrainingService
 import app.orienti.android.ui.screens.common.run_detail.RunDetailFragment
-import app.orienti.android.ui.screens.trainer.control_point_detail.ControlPointDetailActivity
 import dagger.hilt.android.AndroidEntryPoint
 import sk.backbone.parent.ui.screens.ParentActivity
 import java.util.*
@@ -28,7 +27,7 @@ class TrainerRunDetailActivity : ParentActivity<ActivityTrainerRunDetailBinding>
 
         trainingService.getRunByIdAsLiveData(runId).observe(this) { runData ->
             title = runData?.user?.name ?: ""
-            runDetailFragment.setRun(runData, false)
+            runDetailFragment.setupWithRunData(runData, false)
         }
     }
 

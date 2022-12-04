@@ -15,7 +15,7 @@ class RunnerRunDetailFragment : RunDetailFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         trainingService.getActiveRunAsLiveData().observe(this.viewLifecycleOwner){ runData ->
-            setRun(runData, true)
+            setupWithRunData(runData, true)
         }
     }
 }

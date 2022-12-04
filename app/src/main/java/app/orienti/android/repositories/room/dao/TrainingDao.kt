@@ -100,13 +100,6 @@ interface TrainingDao {
     @Delete
     fun deleteTrackControlPoint(trackControlPoint: TrackControlPoint)
 
-    @Query("""UPDATE `Run` SET is_active = 0""")
-    fun deactivateAllRuns()
-
-    @Transaction
-    @Query("""SELECT * FROM `Run` LIMIT 1""")
-    fun getActiveRunData(): RunData?
-
     @Query("""SELECT * FROM `ControlPoint` WHERE controlPointId = :controlPointId LIMIT 1""")
     fun getControlPointLiveDataById(controlPointId: UUID): LiveData<ControlPoint?>
 
