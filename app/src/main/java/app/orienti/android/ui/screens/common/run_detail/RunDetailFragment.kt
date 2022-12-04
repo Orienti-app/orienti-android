@@ -5,15 +5,13 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import app.orienti.android.R
 import app.orienti.android.databinding.FragmentRunDetailBinding
-import app.orienti.android.entities.db_entities.Track
 import app.orienti.android.entities.db_entities.joined.RunData
 import app.orienti.android.entities.qr.QrContainer
 import app.orienti.android.entities.qr.QrType
 import app.orienti.android.ui.screens.runner.main.ScannedControlPointsAdapter
 import sk.backbone.parent.ui.components.recycler_decorations.LinearSpacingItemDecorationVertical
 import sk.backbone.parent.ui.screens.ParentFragment
-import sk.backbone.parent.utils.setCompressedBase64JsonDataToQrCode
-import java.util.*
+import sk.backbone.parent.utils.setGzipBase64JsonDataToQrCode
 
 
 abstract class RunDetailFragment : ParentFragment<FragmentRunDetailBinding>(FragmentRunDetailBinding::inflate) {
@@ -33,7 +31,7 @@ abstract class RunDetailFragment : ParentFragment<FragmentRunDetailBinding>(Frag
                 ScannedControlPointsAdapter(it.context).apply {
                     replaceDataSet(runData.runControlPoints)
                     if(showQrCode){
-                        viewBinding.qrCode.setCompressedBase64JsonDataToQrCode(QrContainer(QrType.RUN, run = runData))
+                        viewBinding.qrCode.setGzipBase64JsonDataToQrCode(QrContainer(QrType.RUN, run = runData))
                     }
                 }
             }
