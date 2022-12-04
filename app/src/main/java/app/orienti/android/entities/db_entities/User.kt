@@ -9,6 +9,6 @@ import java.util.*
 data class User(
     @PrimaryKey
     @ColumnInfo(name = "userId")
-    val userId: UUID,
-    val name: String?
+    val userId: UUID = UUID.randomUUID(),
+    var name: String? = ""
     )

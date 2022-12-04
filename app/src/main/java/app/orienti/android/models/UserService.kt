@@ -11,15 +11,27 @@ import javax.inject.Singleton
 class UserService @Inject constructor() {
     @Inject lateinit var userSharedPreferences: UserSharedPreferences
 
-    val user: User get() = User(UUID.randomUUID(), userSharedPreferences.getName())
-    val runnerId get() = user.userId
+    val currentUser: User get() = userSharedPreferences.getCurrentUser() ?: createUserIfNecessary()
+    val currentUserId get() = currentUser.userId
+
+    fun createUserIfNecessary() : User {
+        var currentUser = userSharedPreferences.getCurrentUser()
+        if(currentUser == null){
+            currentUser = User()
+            userSharedPreferences.setCurrentUser(currentUser)
+        }
+        return currentUser
+    }
 
     fun setUserName(userName: String?){
-        userSharedPreferences.setName(userName)
+        val user = currentUser
+        user.name = userName
+
+        userSharedPreferences.setCurrentUser(user)
     }
 
     fun getUserName(): String? {
-        return userSharedPreferences.getName()
+        return currentUser.name
     }
 
     fun hasUserName(): Boolean {

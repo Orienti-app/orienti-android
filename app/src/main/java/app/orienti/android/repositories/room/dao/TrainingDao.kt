@@ -83,7 +83,7 @@ interface TrainingDao {
 
     @Insert
     @Transaction
-    fun insert(runData: RunData) {
+    fun insert(runData: RunData): RunData {
         insert(runData.trackData.track)
         runData.user?.let { insert(it) }
         insert(runData.run)
@@ -93,6 +93,8 @@ interface TrainingDao {
         }
 
         insert(runData.trackData.controlPoints)
+
+        return runData
     }
 
     @Delete

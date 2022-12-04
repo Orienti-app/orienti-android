@@ -18,6 +18,8 @@ class LauncherActivity : ParentActivity<ViewBinding>(null) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        userService.createUserIfNecessary()
+
         when(userService.getUserType()){
             UserType.NONE -> SelectModeActivity.startActivity(this)
             UserType.RUNNER -> RunnerMainActivity.startActivity(this)

@@ -7,7 +7,6 @@ import app.orienti.android.entities.db_entities.joined.ControlPointData
 import app.orienti.android.entities.db_entities.joined.RunData
 import app.orienti.android.entities.db_entities.joined.TrackData
 import app.orienti.android.entities.db_entities.joined.TrainingData
-import app.orienti.android.entities.qr.QrContainer
 import app.orienti.android.repositories.room.AppDatabase
 import dagger.hilt.android.qualifiers.ApplicationContext
 import java.util.*
@@ -42,7 +41,8 @@ class TrainingService @Inject constructor(@ApplicationContext val context: Conte
 
     fun startNewRun(trackData: TrackData){
         trainingDao.deactivateAllRuns()
-        trainingDao.insert(RunData(Run(UUID.randomUUID(), trackData.track.id, null, userService.runnerId, true, Date(), null), userService.user, trackData))
+        val run: RunData = trainingDao.insert(RunData(Run(UUID.randomUUID(), trackData.track.id, null, userService.currentUserId, true, Date(), null), userService.currentUser, trackData))
+
     }
 
     fun getActiveRunAsLiveData(): LiveData<RunData?> {
