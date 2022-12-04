@@ -8,12 +8,7 @@ import android.view.MenuItem
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import app.orienti.android.databinding.ActivityTrainingDetailBinding
-import app.orienti.android.entities.db_entities.Run
-import app.orienti.android.entities.db_entities.Runner
-import app.orienti.android.entities.db_entities.Track
 import app.orienti.android.entities.db_entities.Training
-import app.orienti.android.entities.db_entities.joined.RunData
-import app.orienti.android.entities.db_entities.joined.TrackData
 import app.orienti.android.entities.db_entities.joined.TrainingData
 import app.orienti.android.models.TrainingService
 import app.orienti.android.ui.screens.trainer.scan_run.ScanRunActivity
@@ -45,7 +40,7 @@ class TrainingDetailActivity: ParentActivity<ActivityTrainingDetailBinding>(Acti
         viewBinding.recycler.layoutManager = LinearLayoutManager(this)
 
         viewBinding.add.setSafeOnClickListener {
-            scanRunLauncher.launch(ScanRunActivity.createIntent(it.context))
+            scanRunLauncher.launch(ScanRunActivity.createIntent(it.context, trainingId))
         }
     }
 

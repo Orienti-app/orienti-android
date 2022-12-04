@@ -11,12 +11,12 @@ import app.orienti.android.repositories.room.dao.TrainingDao
 @Database(entities = [
     Training::class,
     Run::class,
-    Runner::class,
+    User::class,
     Track::class,
     TrackControlPoint::class,
     ScannedRunControlPoint::class,
     ControlPoint::class,
-                     ], version = 9, exportSchema = false)
+                     ], version = 10, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun trainingDao(): TrainingDao

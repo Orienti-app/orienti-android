@@ -6,9 +6,9 @@ import androidx.room.PrimaryKey
 import java.util.*
 
 @Entity
-data class Runner(
+data class User(
     @PrimaryKey
-    @ColumnInfo(name = "runnerId")
-    val id: UUID,
+    @ColumnInfo(name = "userId")
+    val userId: UUID,
     val name: String?
     )

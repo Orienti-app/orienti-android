@@ -11,8 +11,8 @@ data class Run(
     @ColumnInfo(name = "runId")
     val runId: UUID,
     val trackId: UUID,
-    val trainingId: UUID?,
-    val runnerId: UUID,
+    var trainingId: UUID?,
+    val userId: UUID,
     val is_active: Boolean,
     val started_at: Date,
     val finished_at: Date?,

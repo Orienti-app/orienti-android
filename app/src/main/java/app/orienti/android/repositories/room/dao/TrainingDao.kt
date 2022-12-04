@@ -7,6 +7,7 @@ import app.orienti.android.entities.db_entities.joined.ControlPointData
 import app.orienti.android.entities.db_entities.joined.RunData
 import app.orienti.android.entities.db_entities.joined.TrackData
 import app.orienti.android.entities.db_entities.joined.TrainingData
+import app.orienti.android.entities.qr.QrContainer
 import java.util.*
 
 @Dao
@@ -59,7 +60,7 @@ interface TrainingDao {
     fun insert(trainingData: Training)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(runner: Runner)
+    fun insert(user: User)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(run: Run)
@@ -84,7 +85,7 @@ interface TrainingDao {
     @Transaction
     fun insert(runData: RunData) {
         insert(runData.trackData.track)
-        runData.runner?.let { insert(it) }
+        runData.user?.let { insert(it) }
         insert(runData.run)
 
         runData.trackData.trackControlPoints.forEach {
@@ -112,5 +113,8 @@ interface TrainingDao {
 
     @Query("""SELECT * FROM `ControlPoint` WHERE controlPointId = :controlPointId LIMIT 1""")
     fun getControlPointLiveDataById(controlPointId: UUID): LiveData<ControlPoint?>
+    fun insert(runData: QrContainer) {
+
+    }
 }
 
