@@ -31,6 +31,10 @@ class ScanControlPointActivity: QrScanningActivity() {
             finish()
         } else if(qrData?.type == QrType.FINISH_RUN) {
             trainingService.onStopScanned()
+
+            val intent = Intent()
+            setResult(RESULT_OK, intent)
+            finish()
         }
     }
 

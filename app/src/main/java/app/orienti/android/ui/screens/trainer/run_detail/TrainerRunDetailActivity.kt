@@ -27,7 +27,7 @@ class TrainerRunDetailActivity : ParentActivity<ActivityTrainerRunDetailBinding>
 
         trainingService.getRunByIdAsLiveData(runId).observe(this) { runData ->
             title = runData?.user?.name ?: ""
-            runDetailFragment.setupWithRunData(runData, false)
+            runDetailFragment.setupWithRunData(runData, false, true, false)
         }
     }
 

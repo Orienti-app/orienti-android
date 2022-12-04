@@ -38,4 +38,5 @@
     <string name="menu_scan_run">Scan run</string>
     <string name="control_point_finish_code">FINISH</string>
     <string name="control_point_finish_name">FINISH</string>
+    <string name="global_finished">Finished</string>
 </resources>

@@ -47,6 +47,7 @@
                 android:orientation="vertical">
 
                 <LinearLayout
+                    android:id="@+id/started_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/spacing_tiny_4_dp"
@@ -69,6 +70,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/elapsed_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/spacing_tiny_4_dp"
@@ -91,6 +93,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/since_last_control_point_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/spacing_tiny_4_dp"
@@ -106,6 +109,28 @@
 
                     <TextView
                         android:id="@+id/since_last_control_point"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        tools:text="21.12.2021 22:23:24"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/finished_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_tiny_4_dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_19_sp"
+                        android:text="@string/global_finished" />
+
+                    <TextView
+                        android:id="@+id/finished"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
