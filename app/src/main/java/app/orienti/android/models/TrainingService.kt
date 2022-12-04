@@ -95,4 +95,8 @@ class TrainingService @Inject constructor(@ApplicationContext val context: Conte
         runData.run.trainingId = trainingId
         trainingDao.insert(runData)
     }
+
+    fun getRunByIdAsLiveData(runId: UUID): LiveData<RunData?> {
+        return trainingDao.getRunDataByIdAsLiveData(runId)
+    }
 }

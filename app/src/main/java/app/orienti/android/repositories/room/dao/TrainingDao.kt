@@ -116,5 +116,9 @@ interface TrainingDao {
     fun insert(runData: QrContainer) {
 
     }
+
+    @Transaction
+    @Query("""SELECT * FROM `Run` WHERE runId = :runId LIMIT 1""")
+    fun getRunDataByIdAsLiveData(runId: UUID) : LiveData<RunData?>
 }
 

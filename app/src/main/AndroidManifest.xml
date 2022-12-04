@@ -83,7 +83,12 @@
             android:label="@string/activity_control_points_selection_label">
         </activity>
         <activity
-            android:name=".ui.screens.trainer.run_detail.ControlPointDetailActivity"
+            android:name=".ui.screens.trainer.control_point_detail.ControlPointDetailActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".ui.screens.trainer.run_detail.TrainerRunDetailActivity"
             android:exported="true"
             android:screenOrientation="portrait">
         </activity>

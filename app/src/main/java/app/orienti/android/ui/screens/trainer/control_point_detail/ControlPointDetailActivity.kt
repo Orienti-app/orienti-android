@@ -1,4 +1,4 @@
-package app.orienti.android.ui.screens.trainer.run_detail
+package app.orienti.android.ui.screens.trainer.control_point_detail
 
 import android.content.Context
 import android.content.Intent
